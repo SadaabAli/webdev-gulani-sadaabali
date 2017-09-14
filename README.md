@@ -1,3 +1,7 @@
+I am pursing MS in CS at Northeastern University. This repository contains the code for assigments and projects
+for CS5610 Web Development.
+Root to the hosted environment on Heroku : https://gulani-sadaabali-webdev.herokuapp.com/
+
 # AngularFourMEANSeed
 
 After you clone this repository and run "npm install"
