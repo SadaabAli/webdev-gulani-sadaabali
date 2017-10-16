@@ -1,0 +1,49 @@
+<nav class="navbar sadaab-navbar-color navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+
+    <p class="navbar-text pull-left">
+      <a [routerLink]="['/user', userId, 'website']" class="navbar-link">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+    </p>
+
+    <!--heading on the nav bar-->
+    <p class="navbar-header pull-left">
+      <a class="navbar-brand thick">
+        <b>Pages</b>
+      </a>
+    </p>
+
+    <p class="navbar-text pull-right">
+      <a  [routerLink]="['/user', userId, 'website', wid, 'page', 'new']" class="navbar-link">
+        <span class="glyphicon glyphicon-plus"></span>
+      </a>
+    </p>
+
+  </div>
+</nav>
+
+<div class="container-fluid page-margin">
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let websitePage of websitePages">
+      <a [routerLink]="['/user', userId, 'website', wid, 'page', websitePage['_id'], 'widget']">
+        {{websitePage['name']}}
+      </a>
+      <a [routerLink]="['/user', userId, 'website', wid, 'page', websitePage['_id']]">
+        <span class="glyphicon glyphicon-cog pull-right"></span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<!-- Footer -->
+<nav class="navbar sadaab-navbar-color navbar-default navbar-fixed-bottom">
+  <div class="container-fluid">
+    <p class="navbar-text pull-right">
+      <a [routerLink]="['/user', userId]">
+        <span class="glyphicon glyphicon-user"></span>
+      </a>
+    </p>
+
+  </div>
+</nav>

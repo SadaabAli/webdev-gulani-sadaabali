@@ -1,0 +1,76 @@
+<form (ngSubmit) = "RegisterNewUser()" #f="ngForm">
+
+  <div class="container-fluid">
+    <h1>Register</h1>
+    <input placeholder="username"
+           type="text"
+           class="form-control margin-top"
+           name="username"
+           required
+           ngModel
+           #username="ngModel"
+           placeholder="Enter a Username"/>
+    <span class="help-block" *ngIf="!username.valid && username.touched">
+      You seem to have missed out on username!
+    </span>
+    <input placeholder="password"
+           type="password"
+           class="form-control margin-top"
+           ngModel
+           #password="ngModel"
+           name="password"
+           placeholder="Choose a password"
+           required/>
+    <span class="help-block" *ngIf="!password.valid && password.touched">
+      You seem to have missed out on password!
+    </span>
+    <input type="password"
+           ngModel
+           required
+           name="verifyPassword"
+           #verifyPassword="ngModel"
+           class="form-control margin-top"
+           placeholder="Verify Password"
+           id = "verifyPassword"/>
+    <span class="help-block" *ngIf="!verifyPassword.valid && verifyPassword.touched">
+      Please don't forger to verify the password!
+    </span>
+    <input placeholder="Enter First Name"
+           type="text"
+           class="form-control margin-top"
+           name="firstName"
+           required
+           ngModel
+           #firstName="ngModel"/>
+    <span class="help-block" *ngIf="!firstName.valid && firstName.touched">
+      Please don't forget to enter first name!
+    </span>
+    <input placeholder="Enter Last name"
+           type="text"
+           class="form-control margin-top"
+           name="lastName"
+           required
+           ngModel
+           #lastName="ngModel"/>
+    <span class="help-block" *ngIf="!lastName.valid && lastName.touched">
+      Please don't forget to enter last name!
+    </span>
+    <input placeholder="Enter your email"
+           type="email"
+           class="form-control margin-top"
+           name="email"
+           required
+           ngModel
+           #email="ngModel"/>
+    <span class="help-block" *ngIf="!email.valid && email.touched">
+      Please don't forget to enter your email!!
+    </span>
+    <button class="btn btn-primary btn-block margin-top"
+       type="submit"
+       [routerLink]= "['/login']"
+       [disabled]="!f.valid">Register</button>
+    <a class="btn btn-danger btn-block margin-top"
+       [routerLink]= "['/login']" >Cancel</a>
+
+  </div>
+</form>

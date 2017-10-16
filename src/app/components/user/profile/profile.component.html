@@ -1,0 +1,81 @@
+<form (ngSubmit) = "EditProfile()" #f="ngForm">
+
+  <nav class="navbar sadaab-navbar-color navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <!--heading on the nav bar-->
+      <p class="navbar-header pull-left">
+        <a class="navbar-brand thick">
+          <b>Profile</b>
+        </a>
+      </p>
+
+      <p class="navbar-text pull-right">
+        <button type='submit'
+           class="navbar-link transparent-button" [disabled]="!f.valid">
+          <span class="glyphicon glyphicon-ok"></span>
+        </button>
+      </p>
+    </div>
+  </nav>
+
+
+  <div class="container-fluid"
+       style="top: 0px;bottom: 0px;left: 0px;margin-top: 50px;padding-top: 15px">
+    <label for="username" class="margin-top">Username</label>
+    <input type="text"
+           id="username"
+           name="username"
+           [(ngModel)]="username"
+           class="form-control" />
+
+    <label for="password" class="margin-top">Password</label>
+    <input
+      [(ngModel)]= 'password'
+      type="password"
+      class="form-control"
+      id="password"
+      name="password">
+
+    <label for="email"  class="margin-top">Email address</label>
+    <input
+      [(ngModel)]= 'email'
+      type="email"
+      class="form-control"
+      id="email"
+      name="email">
+
+    <label for="first-name"  class="margin-top">First Name</label>
+    <input
+      [(ngModel)]= 'firstName'
+      type="text"
+      class="form-control"
+      id="first-name"
+      name="first-name">
+
+    <label for="last-name" class="margin-top">Last Name</label>
+    <input
+      [(ngModel)]='lastName'
+      type="text"
+      class="form-control"
+      id="last-name"
+      name="last-name">
+
+    <a class="btn btn-primary btn-block margin-top"
+       [routerLink]="['/user', userId, 'website']">Websites</a>
+    <a class="btn btn-danger btn-block margin-top"
+       [routerLink]= "['/login']" >Logout</a>
+
+  </div>
+
+  <!-- Footer -->
+  <nav class="navbar sadaab-navbar-color navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+      <p class="navbar-text pull-right">
+        <a [routerLink]="['/user',userId]">
+          <span class="glyphicon glyphicon-user"></span>
+        </a>
+      </p>
+
+    </div>
+  </nav>
+</form>
