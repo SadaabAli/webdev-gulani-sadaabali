@@ -58,3 +58,15 @@
   margin-top: 50px;
   padding-top: 15px
 }
+
+.transparent-button
+{
+  background-color: Transparent;
+  border: none;
+  cursor:pointer;
+}
+
+.page-new-top-glyp-margin
+{
+  padding-top: 5px;
+}

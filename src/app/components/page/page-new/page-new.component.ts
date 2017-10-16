@@ -24,7 +24,7 @@ export class PageNewComponent implements OnInit {
     this.activatedRoute.params
       .subscribe(
         (params: any) => {
-          this.userId = params['userId'];
+          this.userId = params['uid'];
           this.wid = params['wid'];
         }
       );

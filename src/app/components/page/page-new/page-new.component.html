@@ -3,21 +3,21 @@
     <div class="container-fluid">
 
       <div class="col-sm-4 col-xs-1">
-        <p class="navbar-text pull-left">
+        <p class="navbar-text pull-left page-new-top-glyp-margin">
           <a [routerLink]="['/user', userId, 'website', wid, 'page']" class="navbar-link">
             <span class="glyphicon glyphicon-chevron-left"></span>
           </a>
         </p>
 
         <!--heading on the nav bar-->
-        <p class="navbar-header pull-left">
+        <p class="navbar-header pull-left page-new-top-glyp-margin">
           <a class="navbar-brand thick">
             <b>Pages</b>
           </a>
         </p>
 
         <!--tick mark-->
-        <p class="navbar-text pull-right">
+        <p class="navbar-text pull-right page-new-top-glyp-margin">
           <a [routerLink]="['/user', userId, 'website', wid, 'page', 'new']" class="navbar-link">
             <span class="glyphicon glyphicon-plus"></span>
           </a>
@@ -26,20 +26,19 @@
 
       <div class="col-sm-8">
         <!--heading on the nav bar-->
-        <p class="navbar-header pull-left">
+        <p class="navbar-header pull-left page-new-top-glyp-margin">
           <a class="navbar-brand thick">
             <b>New Page</b>
           </a>
         </p>
 
         <!--tick mark-->
-        <p class="navbar-text pull-right">
-          <button class="navbar-link"
-                  [disabled]="!f.valid"
+        <p class="navbar-text pull-right page-new-top-glyp-margin">
+          <a class= "navbar-link"
                   [routerLink]="['/user', userId, 'website', wid, 'page']"
                   (click)="createPage()">
             <span class="glyphicon glyphicon-ok"></span>
-          </button>
+          </a>
         </p>
       </div>
 

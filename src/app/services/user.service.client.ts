@@ -26,7 +26,6 @@ export class UserService {
   createUser(user: any) {
     user._id = Math.random();
     this.users.push(user);
-    alert('useradded' + user._id);
     return user;
   }
 
@@ -51,7 +50,6 @@ export class UserService {
   updateUser(userId, user) {
     for (let x = 0; x < this.users.length; x++) {
       if (this.users[x]._id === userId) {
-        alert(user['email']);
         this.users[x] = user; }
     }
   }

@@ -22,7 +22,7 @@ export class WidgetHeaderComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoutes.params.subscribe(params => {
-      this.uId = params['userId'];
+      this.uId = params['uid'];
       this.wid = params['wid'];
       this.pid = params['pid'];
       this.widgetId = params['wgid'];
@@ -40,6 +40,7 @@ export class WidgetHeaderComponent implements OnInit {
   }
 
   deleteWidget() {
+    alert(this.widgetId);
     this.widgetService.deleteWidget(this.widgetId);
   }
 

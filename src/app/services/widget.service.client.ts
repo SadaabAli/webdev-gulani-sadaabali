@@ -18,8 +18,8 @@ export class WidgetService {
       'url': 'http://lorempixel.com/400/200/'},
     { '_id': '456', 'widgetType': 'HTML', 'pageId': '321', 'text': '<p>Lorem ipsum</p>'},
     { '_id': '567', 'widgetType': 'HEADING', 'pageId': '321', 'size': 4, 'text': 'Lorem ipsum'},
-    { '_id': '678', 'widgetType': 'YOUTUBE', 'pageId': '000', 'width': '100%',
-      'url': 'https://youtu.be/AM2Ivdi9c4E' },
+    { '_id': '678', 'widgetType': 'YOUTUBE', 'pageId': '890', 'width': '100%',
+      'url': 'https://www.youtube.com/embed/AM2Ivdi9c4E' },
     { '_id': '789', 'widgetType': 'HTML', 'pageId': '890', 'text': '<p>Lorem ipsum</p>'}
   ];
 
@@ -59,7 +59,7 @@ export class WidgetService {
   deleteWidget(widgetId) {
     for (let x = 0; x < this.widgets.length; x++) {
       if (this.widgets[x]._id === widgetId) {
-        delete this.widgets[x];
+        this.widgets.splice(x, 1 );
       }
     }
   }

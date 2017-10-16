@@ -1,96 +1,51 @@
 <nav class="navbar navbar-default sadaab-navbar-color navbar-fixed-top nav-collapse collapsing" style="height:60px">
   <div class="container-fluid">
+   <p class="navbar-text pull-left page-new-top-glyp-margin">
+      <a [routerLink]="['/user', userId, 'website', wid, 'page', pid, 'widget']" class="navbar-link">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+    </p>
 
-    <div class="col-sm-4 col-xs-1">
-      <p class="navbar-text pull-left">
-        <a [routerLink]="['/user', userId, 'website', wid, 'page', pid, 'widget']" class="navbar-link">
-          <span class="glyphicon glyphicon-chevron-left"></span>
-        </a>
-      </p>
-
-      <!--heading on the nav bar-->
-      <p class="navbar-header pull-left">
-        <a class="navbar-brand thick">
-          <b>Widgets</b>
-        </a>
-      </p>
+    <!--heading on the nav bar-->
+    <p class="navbar-header pull-left page-new-top-glyp-margin">
+      <a class="navbar-brand thick">
+        <b>Image Widget Edit</b>
+      </a>
+    </p>
 
       <!--tick mark-->
-      <p class="navbar-text pull-right">
-        <a [routerLink]="['/user', userId, 'website', wid, 'page', pid, 'widget']" class="navbar-link">
-          <span class="glyphicon glyphicon-plus"></span>
-        </a>
-      </p>
-    </div>
-
-    <div class="col-sm-8">
-      <!--heading on the nav bar-->
-      <p class="navbar-header pull-left">
-        <a class="navbar-brand thick">
-          <b>Widget Edit</b>
-        </a>
-      </p>
-
-      <!--tick mark-->
-      <p (click)="updateWidget()" class="navbar-text pull-right">
+      <p (click)="updateWidget()" class="navbar-text pull-right page-new-top-glyp-margin">
         <a [routerLink]="['/user', userId, 'website', wid, 'page', pid, 'widget']" class="navbar-link">
           <span class="glyphicon glyphicon-ok"></span>
         </a>
       </p>
     </div>
-
-  </div>
 </nav>
 
 
-<div class="container-fluid page-margin"></div>
-<div class="row">
-  <div class="col-sm-4 hidden-xs">
-    <ul class="list-group">
-      <li class="list-group-item">
-        <a href="#">
-          HTML
-        </a>
-      </li>
-      <li class="list-group-item">
-        <a href="widget-image.html">
-          Image
-        </a>
-      </li>
-      <li class="list-group-item">
-        <a href="widget-youtube.html">
-          YouTube
-        </a>
-      </li>
-    </ul>
-  </div>
-  <div class="col-sm-8">
-    <form>
+<div class="container-fluid page-margin">
+  <form>
+    <div class="form-group">
+      <label for="url">URL</label>
+      <input type="url"
+             class="form-control"
+             id= "url"
+             placeholder="www.arsenal.com"
+             name="url"
+             [(ngModel)]="url">
+    </div>
 
-      <div class="form-group">
-        <label for="url">URL</label>
-        <input type="url"
-               class="form-control"
-               id= "url"
-               placeholder="www.arsenal.com"
-               name="url"
-               [(ngModel)]="url">
-      </div>
-    </form>
-
-    <form>
-      <div class="form-group">
-        <label for="width">Width</label>
-        <input [(ngModel)]="width"
-               name="width"
-               required
-               type="text"
-               required
-               class="form-control"
-               id="width"
-               placeholder="100%">
-      </div>
-    </form>
+    <div class="form-group">
+      <label for="width">Width</label>
+      <input [(ngModel)]="width"
+             name="width"
+             required
+             type="text"
+             required
+             class="form-control"
+             id="width"
+             placeholder="100%">
+    </div>
     <div class="form-group">
       <a (click)="delete()"
          class="btn btn-danger btn-block "
@@ -98,6 +53,7 @@
         Delete
       </a>
     </div>
+  </form>
 </div>
 
 <!-- Footer -->

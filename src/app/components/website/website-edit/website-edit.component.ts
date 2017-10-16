@@ -40,11 +40,13 @@ export class WebsiteEditComponent implements OnInit {
                             'developerId': this.userId,
                             'description': this.websiteEditForm.value.description };
     this.webService.updateWebsite(this.wid, editedWebsite );
-    this.router.navigate(['user/' + this.userId, 'website'])
-      }
+    this.router.navigate(['user/' + this.userId, 'website']);
+  }
 
     DeleteWebsite() {
-    this.webService.deleteWebsite(this.wid);
+      alert(this.userId);
+      alert('From outside' + this.wid);
+      this.webService.deleteWebsite(this.wid);
       this.router.navigate(['user/' + this.userId, 'website']);
     }
 }

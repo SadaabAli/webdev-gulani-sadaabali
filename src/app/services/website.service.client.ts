@@ -58,7 +58,7 @@ export class WebsiteService {
   deleteWebsite(websiteId) {
     for (let x = 0; x < this.websites.length; x++) {
       if (this.websites[x]._id === websiteId) {
-        delete this.websites[x];
+        this.websites.splice(x, 1 );
       }
     }
   }

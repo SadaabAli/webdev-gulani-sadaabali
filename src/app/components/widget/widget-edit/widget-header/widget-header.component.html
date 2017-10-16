@@ -1,74 +1,30 @@
 <nav class="navbar navbar-default sadaab-navbar-color navbar-fixed-top nav-collapse collapsing" style="height:60px">
   <div class="container-fluid">
 
-    <div class="col-sm-4 col-xs-1">
-      <p class="navbar-text pull-left">
-        <a [routerLink]="['/user', uId, 'website', wid, 'page', pid, 'widget']" class="navbar-link">
-          <span class="glyphicon glyphicon-chevron-left"></span>
-        </a>
-      </p>
+    <p class="navbar-text pull-left page-new-top-glyp-margin">
+      <a [routerLink]="['/user', uId, 'website', wid, 'page', pid, 'widget']" class="navbar-link">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+    </p>
 
-      <!--heading on the nav bar-->
-      <p class="navbar-header pull-left">
-        <a class="navbar-brand thick">
-          <b>Widgets</b>
-        </a>
-      </p>
+    <!--heading on the nav bar-->
+    <p class="navbar-header pull-left page-new-top-glyp-margin">
+      <a class="navbar-brand thick">
+        <b>Header Widget Edit</b>
+      </a>
+    </p>
 
-      <!--tick mark-->
-      <p class="navbar-text pull-right">
-        <a [routerLink]="['/user', uId, 'website', wid, 'page', pid, 'widget', 'new']" class="navbar-link">
-          <span class="glyphicon glyphicon-plus"></span>
-        </a>
-      </p>
+    <!--tick mark-->
+    <p class="navbar-text pull-right page-new-top-glyp-margin">
+      <a (click)="updateWidget()" [routerLink]="['/user', uId, 'website', wid, 'page', pid, 'widget']" class="navbar-link">
+        <span class="glyphicon glyphicon-ok"></span>
+      </a>
+    </p>
     </div>
-
-    <div class="col-sm-8">
-      <!--heading on the nav bar-->
-      <p class="navbar-header pull-left">
-        <a class="navbar-brand thick">
-          <b>Widget Edit</b>
-        </a>
-      </p>
-
-      <!--tick mark-->
-      <p class="navbar-text pull-right">
-        <a (click)="updateWidget()" [routerLink]="['/user', uId, 'website', wid, 'page', pid, 'widget']" class="navbar-link">
-          <span class="glyphicon glyphicon-ok"></span>
-        </a>
-      </p>
-    </div>
-
-  </div>
 </nav>
 
-<div class="col-sm-4">
+<div class="container-fluid">
 
-<div class="container-fluid page-margin">
-  <ul class="list-group">
-    <li class="list-group-item">
-      <a  [routerLink]="['/user', uId, 'website' , wid, 'page' , pid, 'widget', 'new', 'header']">
-        Header
-      </a>
-    <li class="list-group-item">
-      <a [routerLink]="['/user', uId, 'website' , wid, 'page' , pid, 'widget', 'new', 'html']">
-        HTML
-      </a>
-    <li class="list-group-item">
-      <a [routerLink]="['/user', uId, 'website' , wid, 'page' , pid, 'widget', 'new', 'image']">
-        Image
-      </a>
-    </li>
-    <li class="list-group-item">
-      <a [routerLink]="['/user', uId, 'website' , wid, 'page' , pid, 'widget', 'new', 'youtube']">
-        YouTube
-      </a>
-    </li>
-  </ul>
-</div>
-</div>
-
-<div class="col-sm-8">
   <form>
     <div class="form-group margin-top-huge">
       <label for="textHeader">Name</label>
@@ -82,18 +38,20 @@
     </div>
   </form>
 
-  <div class="form-group">
-    <label for="sizeHeader">
-      Size
-    </label>
-    <input [(ngModel)]="sizeHeader"
-           required
-           name="sizeHeader"
-           type="number"
-           class="form-control"
-           id="sizeHeader"
-           placeholder="3">
-  </div>
+  <form>
+    <div class="form-group">
+      <label for="sizeHeader">
+        Size
+      </label>
+      <input [(ngModel)]="sizeHeader"
+             required
+             name="sizeHeader"
+             type="number"
+             class="form-control"
+             id="sizeHeader"
+             placeholder="3">
+    </div>
+  </form>
 
   <a (click)="deleteWidget()" class="btn btn-danger btn-block "
      [routerLink]="['/user', uId, 'website', wid, 'page', pid, 'widget']">Delete</a>

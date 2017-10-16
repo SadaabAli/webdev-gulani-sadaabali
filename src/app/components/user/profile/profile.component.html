@@ -3,17 +3,17 @@
   <nav class="navbar sadaab-navbar-color navbar-default navbar-fixed-top">
     <div class="container-fluid">
       <!--heading on the nav bar-->
-      <p class="navbar-header pull-left">
+      <p class="navbar-header pull-left page-new-top-glyp-margin">
         <a class="navbar-brand thick">
           <b>Profile</b>
         </a>
       </p>
 
-      <p class="navbar-text pull-right">
-        <button type='submit'
-           class="navbar-link transparent-button" [disabled]="!f.valid">
+      <p class="navbar-text pull-right page-new-top-glyp-margin">
+        <a (click)="EditProfile()"
+           class="navbar-link">
           <span class="glyphicon glyphicon-ok"></span>
-        </button>
+        </a>
       </p>
     </div>
   </nav>
