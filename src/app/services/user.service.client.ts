@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 
 export class UserService {
 
-  constructor() { }
+  constructor(private  http: Http) { }
 
   users = [
       {_id: '123', username: 'alice',    password: 'alice',    firstName: 'Alice',  lastName: 'Wonder' , email: 'alice@webdev.com' },
@@ -43,9 +43,14 @@ export class UserService {
   }
 
   findUserByCredentials(username, password) {
-    for (let x = 0; x < this.users.length; x++) {
-      if (this.users[x].username === username && this.users[x].password === password) {  return this.users[x]; }
-    }
+    return this.http.get('http://localhost:3100/api/user?username=' + username + '&password=' + password)
+      .map((response: Response) => {
+       response.json();
+    });
+
+    // for (let x = 0; x < this.users.length; x++) {
+    //   if (this.users[x].username === username && this.users[x].password === password) {  return this.users[x]; }
+    // }
   }
   updateUser(userId, user) {
     for (let x = 0; x < this.users.length; x++) {
