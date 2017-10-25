@@ -22,7 +22,6 @@ module.exports = function(app){
   function findUserById(req,res)
   {
     var userId = req.params["userId"];
-    var user;
     for (let x = 0; x < this.users.length; x++)
     {
       if (this.users[x]._id === userId)
@@ -30,7 +29,14 @@ module.exports = function(app){
         user =  this.users[x];
       }
     }
-    res.json(user);
+    if (user)
+    {
+      res.json(user);
+    }
+    else
+    {
+      res.json({});
+    }
   }
 
   function findUserByCredentials(req,res)
@@ -49,10 +55,12 @@ module.exports = function(app){
       }
       if (user)
       {
+        console.log("User not found in User service");
         res.json(user);
       }
       else
       {
+        console.log("User not found in User service");
         res.json({});
       }
     }
@@ -75,5 +83,6 @@ module.exports = function(app){
         res.json({});
       }
     }
+    return
   }
 };

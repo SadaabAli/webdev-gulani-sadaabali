@@ -30,10 +30,15 @@ export class UserService {
   }
 
   findUserById(userId: String) {
-    for (let x = 0; x < this.users.length; x++) {
-      if (this.users[x]._id === userId) {
-        return this.users[x]; }
-    }
+    const url = 'http://localhost:3100/api/user/' + userId;
+    return this.http.get(url)
+      .map((response: Response) => {
+       response.json();
+    });
+    // for (let x = 0; x < this.users.length; x++) {
+    //   if (this.users[x]._id === userId) {
+    //     return this.users[x]; }
+    // }
   }
 
   findUserByUsername(username: String) {
