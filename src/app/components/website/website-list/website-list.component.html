@@ -24,7 +24,7 @@
 </nav>
 
 <div class="container-fluid page-margin">
-  <ul class="list-group">
+  <ul class="list-group margin-top">
     <li class="list-group-item" *ngFor="let websiteInfo of userWebsite">
       <a [routerLink]="['/user', userId, 'website', websiteInfo['_id'], 'page']">
         {{websiteInfo['name']}}

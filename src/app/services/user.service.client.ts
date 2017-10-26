@@ -25,20 +25,21 @@ export class UserService {
 
   createUser(user: any) {
     user._id = Math.random();
-    this.users.push(user);
-    return user;
+    const url = 'http://localhost:3100/api/user/';
+    return this.http.post(url, user)
+      .map(
+        (res: Response) => {
+          return res.json();
+        }
+      );
   }
 
   findUserById(userId: String) {
     const url = 'http://localhost:3100/api/user/' + userId;
     return this.http.get(url)
       .map((response: Response) => {
-       response.json();
+       return response.json();
     });
-    // for (let x = 0; x < this.users.length; x++) {
-    //   if (this.users[x]._id === userId) {
-    //     return this.users[x]; }
-    // }
   }
 
   findUserByUsername(username: String) {
@@ -50,24 +51,17 @@ export class UserService {
   findUserByCredentials(username, password) {
     return this.http.get('http://localhost:3100/api/user?username=' + username + '&password=' + password)
       .map((response: Response) => {
-       response.json();
+       return response.json();
     });
-
-    // for (let x = 0; x < this.users.length; x++) {
-    //   if (this.users[x].username === username && this.users[x].password === password) {  return this.users[x]; }
-    // }
   }
   updateUser(userId, user) {
-    for (let x = 0; x < this.users.length; x++) {
-      if (this.users[x]._id === userId) {
-        this.users[x] = user; }
-    }
+    return this.http.put('http://localhost:3100/api/user/' + userId, user)
+      .map((response: Response) => {
+        return response.json();
+      });
   }
   deleteUser(userId) {
-    for (let x = 0; x < this.users.length; x++) {
-      if (this.users[x]._id === userId) {
-        delete this.users[x];
-      }
-    }
+    const url = 'http://localhost:3100/api/user/' + userId;
+    return this.http.delete(url);
   }
 }

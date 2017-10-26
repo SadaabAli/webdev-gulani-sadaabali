@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 
 export class PageService {
 
-  constructor() { }
+  constructor(private http: Http) {}
 
   pages   = [
       { '_id': '321', 'name': 'Post 1', 'websiteId': '456', 'description': 'Lorem' },
@@ -30,19 +30,23 @@ export class PageService {
   }
 
   findPageByWebsiteId(websiteId: String) {
-    let websitePages = [];
-    for (let x = 0; x < this.pages.length; x++) {
-      if (this.pages[x].websiteId === websiteId) {
-        websitePages.push(this.pages[x]);
-      }
-    }
-    return websitePages;
+    alert('inside pages of client');
+    return this.http.get('http://localhost:3100/api/website' + websiteId + '/page')
+      .map(
+        (res: Response) => {
+          return res.json();
+        }
+      );
   }
 
   findPageById(pageId: String) {
-    for (let x = 0; x < this.pages.length; x++) {
-      if (this.pages[x]._id === pageId) {  return this.pages[x]; }
-    }
+    return this.http.get('http://localhost:3100/api/page/' + pageId)
+      .map(
+        (res: Response) => {
+          const data = res.json();
+          return data;
+        }
+      );
   }
 
   updatePage(pageId, page) {

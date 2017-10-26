@@ -28,7 +28,12 @@ export class PageNewComponent implements OnInit {
           this.wid = params['wid'];
         }
       );
-    this.webSitePages = this.pageService.findPageByWebsiteId(this.wid);
+    this.pageService.findPageByWebsiteId(this.wid)
+      .subscribe(
+          (pages: any) => {
+            this.webSitePages = pages;
+          }
+        );
   }
 
   createPage() {

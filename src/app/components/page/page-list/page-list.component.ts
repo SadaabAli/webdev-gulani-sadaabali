@@ -25,7 +25,12 @@ export class PageListComponent implements OnInit {
           this.wid = params['wid'];
         }
       );
-    this.websitePages = this.pageService.findPageByWebsiteId(this.wid);
+    this.pageService.findPageByWebsiteId(this.wid)
+      .subscribe(
+        (pages: any) => {
+          this.websitePages = pages;
+        }
+      );
   }
 
 }

@@ -28,7 +28,12 @@ export class PageEditComponent implements OnInit {
         }
       );
     this.currPage = this.pageService.findPageById(this.pageId);
-    this.websitePages = this.pageService.findPageByWebsiteId(this.websiteId);
+    this.pageService.findPageByWebsiteId(this.websiteId)
+      .subscribe(
+        (pages: any) => {
+          this.websitePages = pages;
+        }
+      );
   }
 
   EditPage() {

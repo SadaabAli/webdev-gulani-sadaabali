@@ -21,15 +21,16 @@ export class RegisterComponent implements OnInit {
   RegisterNewUser() {
     if ( this.registerForm.value.password === this.registerForm.value.verifyPassword) {
       const user = {
-        _id: '123',
         username: this.registerForm.value.username,
         password: this.registerForm.value.password,
         firstName: this.registerForm.value.firstName,
         lastName: this.registerForm.value.lastName,
         email: this.registerForm.value.email
       };
-      const newUser = this.userService.createUser(user);
-      this.router.navigate(['user/', newUser._id]);
+      this.userService.createUser(user)
+        .subscribe((newUser: any) => {
+          this.router.navigate(['user/', newUser._id]);
+        });
     }else {
       this.errorFlag = true;
       this.errorMsg = 'Password mismatch!!';

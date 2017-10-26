@@ -11,19 +11,21 @@ import {UserService} from '../../../services/user.service.client';
 export class WebsiteListComponent implements OnInit {
 
   userId: String;
-  userWebsite = [{}]
+  userWebsite = [{}];
   constructor(private userService: UserService,
               private websiteService: WebsiteService,
               private activatedRoute: ActivatedRoute) { }
-  user = {}
+  user = {};
   ngOnInit() {
     this.activatedRoute.params
       .subscribe(
         (params: any) => {
           this.userId = params['uid'];
         });
+    this.websiteService.findWebsitesByUser(this.userId)
+      .subscribe((websites: any) => {
+        this.userWebsite = websites;
+      });
     this.user = this.userService.findUserById(this.userId);
-    this.userWebsite = this.websiteService.findWebsitesByUser(this.userId);
   }
-
 }

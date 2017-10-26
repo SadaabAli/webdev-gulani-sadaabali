@@ -30,17 +30,33 @@ export class WebsiteEditComponent implements OnInit {
           this.wid = params['wid'];
         }
       );
-    this.webName = this.webService.findWebsiteById(this.wid)['name'];
-    this.webDescription = this.webService.findWebsiteById(this.wid)['description'];
-    this.userWebsites = this.webService.findWebsitesByUser(this.userId);
+    this.webService.findWebsiteById(this.wid)
+      .subscribe(
+        (website: any) => {
+          this.webName = website.name;
+          this.webDescription = website.description;
+        }
+      );
+    this.webService.findWebsitesByUser(this.userId)
+      .subscribe((websites: any) => {
+        this.userWebsites = websites;
+        this.webName = this.webService.findWebsiteById(this.wid)['name'];
+        this.webDescription = this.webService.findWebsiteById(this.wid)['description'];
+      });
   }
   EditWebsite() {
     const editedWebsite = { '_id': this.wid,
                             'name': this.websiteEditForm.value.name,
                             'developerId': this.userId,
                             'description': this.websiteEditForm.value.description };
-    this.webService.updateWebsite(this.wid, editedWebsite );
-    this.router.navigate(['user/' + this.userId, 'website']);
+    alert(this.websiteEditForm.value.name);
+    this.webService.updateWebsite(this.wid, editedWebsite )
+      .subscribe(
+        (websites: any) => {
+          this.userWebsites = websites;
+          this.router.navigate(['user/' + this.userId, 'website']);
+        }
+      );
   }
 
     DeleteWebsite() {

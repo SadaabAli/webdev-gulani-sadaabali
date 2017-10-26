@@ -30,23 +30,30 @@ export class ProfileComponent implements OnInit {
         });
     this.userService.findUserById(this.userId)
       .subscribe((user: any) => {
-        this.userId = user._id;
         this.user = user;
+        this.username = this.user.username;
+        alert(this.username);
+        this.firstName = this.user.firstName;
+        this.lastName = this.user.lastName;
+        this.email = this.user.email;
+        this.password = this.user.password;
       });
-    // this.user = this.userService.findUserById(this.userId);
-    this.username = this.user.username;
-    this.firstName = this.user.firstName;
-    this.lastName = this.user.lastName;
-    this.email = this.user.email;
-    this.password = this.user.password;
   }
   EditProfile() {
-    this.user  = this.userService.findUserById(this.userId);
+    // this.user  = this.userService.findUserById(this.userId);
     this.user.username = this.profileForm.value.username;
     this.user.password = this.profileForm.value.password;
     this.user.email = this.profileForm.value.email;
     this.user.firstname = this.profileForm.value.firstName;
     this.user.lastName = this.profileForm.value.lastName;
-    const user = this.userService.updateUser(this.userId, this.user );
+    this.userService.updateUser(this.userId, this.user )
+      .subscribe((user: any) => {
+        this.user = user;
+        this.username = this.user.username;
+        this.firstName = this.user.firstName;
+        this.lastName = this.user.lastName;
+        this.email = this.user.email;
+        this.password = this.user.password;
+      });
   }
 }
