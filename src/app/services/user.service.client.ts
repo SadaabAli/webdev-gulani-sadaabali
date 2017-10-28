@@ -25,7 +25,7 @@ export class UserService {
 
   createUser(user: any) {
     user._id = Math.floor(Math.random() * 10000).toString();
-    const url = 'http://localhost:3100/api/user/';
+    const url = environment.baseUrl + '/api/user/';
     return this.http.post(url, user)
       .map(
         (res: Response) => {
@@ -35,7 +35,7 @@ export class UserService {
   }
 
   findUserById(userId: String) {
-    const url = 'http://localhost:3100/api/user/' + userId;
+    const url = environment.baseUrl + '/api/user/' + userId;
     return this.http.get(url)
       .map((response: Response) => {
        return response.json();
@@ -49,19 +49,19 @@ export class UserService {
   }
 
   findUserByCredentials(username, password) {
-    return this.http.get('http://localhost:3100/api/user?username=' + username + '&password=' + password)
+    return this.http.get(environment.baseUrl + '/api/user?username=' + username + '&password=' + password)
       .map((response: Response) => {
        return response.json();
     });
   }
   updateUser(userId, user) {
-    return this.http.put('http://localhost:3100/api/user/' + userId, user)
+    return this.http.put(environment.baseUrl + '/api/user/' + userId, user)
       .map((response: Response) => {
         return response.json();
       });
   }
   deleteUser(userId) {
-    const url = 'http://localhost:3100/api/user/' + userId;
+    const url = environment.baseUrl + '/api/user/' + userId;
     return this.http.delete(url);
   }
 }
