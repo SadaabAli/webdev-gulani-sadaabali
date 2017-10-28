@@ -756,7 +756,6 @@ var LoginComponent = (function () {
         this.userService.findUserByCredentials(this.username, this.password)
             .subscribe(function (user) {
             if (user) {
-                alert(user._id);
                 _this.errorFlag = false;
                 _this.router.navigate(['/user/' + user._id]);
             }
