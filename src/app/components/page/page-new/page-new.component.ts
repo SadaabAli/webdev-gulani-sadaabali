@@ -34,14 +34,18 @@ export class PageNewComponent implements OnInit {
             this.webSitePages = pages;
           }
         );
-  }
+    }
 
   createPage() {
     const newPage = {
       'name' : this.pageForm.value.name,
       'description' : this.pageForm.value.description
     };
-    this.page = this.pageService.createPage(this.wid, newPage);
-    this.router.navigate(['user/', this.userId, 'website', this.wid, 'page']);
+    this.page = this.pageService.createPage(this.wid, newPage)
+      .subscribe(
+          (page: any) => {
+            this.router.navigate(['user/', this.userId, 'website', this.wid, 'page']);
+          }
+        );
   }
 }

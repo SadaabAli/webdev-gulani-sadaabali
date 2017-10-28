@@ -24,14 +24,18 @@ export class PageService {
 
   createPage(websiteId: String, page: any) {
     page.websiteId = websiteId;
-    page._id = Math.random();
-    this.pages.push(page);
-    return page;
+    page._id = Math.floor(Math.random() * 10000).toString();
+    const url = 'http://localhost:3100/api/website/' + websiteId + '/page';
+    return this.http.post(url, page )
+    .map(
+      (res: Response) => {
+        return res.json();
+      }
+    );
   }
 
   findPageByWebsiteId(websiteId: String) {
-    alert('inside pages of client');
-    return this.http.get('http://localhost:3100/api/website' + websiteId + '/page')
+    return this.http.get('http://localhost:3100/api/website/' + websiteId + '/page')
       .map(
         (res: Response) => {
           return res.json();
@@ -50,15 +54,19 @@ export class PageService {
   }
 
   updatePage(pageId, page) {
-    for (let x = 0; x < this.pages.length; x++) {
-      if (this.pages[x]._id === pageId) {   this.pages[x] = page; }
-    }
+    return this.http.put('http://localhost:3100/api/page/' + pageId, page)
+      .map(
+        (res: Response) => {
+          return res.json();
+        }
+      );
   }
   deletePage(pageId) {
-    for (let x = 0; x < this.pages.length; x++) {
-      if (this.pages[x]._id === pageId) {
-        this.pages.splice(x, 1 );
-      }
-    }
+    return this.http.delete('http://localhost:3100/api/page/' + pageId)
+      .map(
+        (res: Response) => {
+          return res.json();
+        }
+      );
   }
 }

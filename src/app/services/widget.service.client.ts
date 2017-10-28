@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 
 export class WidgetService {
 
-  constructor() { }
+  constructor(private http: Http) {}
 
   widgets  = [
     { '_id': '123', 'widgetType': 'HEADING', 'pageId': '890', 'size': 2, 'text': 'GIZMODO'},
@@ -31,36 +31,47 @@ export class WidgetService {
 
   createWidget(pageId: String, widget: any) {
     widget.pageId = pageId;
-    this.widgets.push(widget);
-    return widget;
+    widget._id = Math.floor(Math.random() * 10000).toString();
+    return this.http.post('http://localhost:3100/api/page/' + pageId + '/widget', widget)
+      .map(
+        (res: Response) => {
+          return res.json();
+        }
+      );
   }
 
   findWidgetsByPageId(pageId: String) {
-    let pageWidgets = [];
-    for (let x = 0; x < this.widgets.length; x++) {
-      if (this.widgets[x].pageId === pageId) {
-        pageWidgets.push(this.widgets[x]);
-      }
-    }
-    return pageWidgets;
+    return this.http.get('http://localhost:3100/api/page/' + pageId + '/widget')
+      .map(
+        (res: Response) => {
+          return res.json();
+        }
+      );
   }
 
   findWidgetById(widgetId: String) {
-    for (let x = 0; x < this.widgets.length; x++) {
-      if (this.widgets[x]._id === widgetId) {  return this.widgets[x]; }
-    }
+    return this.http.get('http://localhost:3100/api/widget/' + widgetId)
+      .map(
+        (res: Response) => {
+          return res.json();
+        }
+      );
   }
 
   updateWidget(widgetId, widget) {
-    for (let x = 0; x < this.widgets.length; x++) {
-      if (this.widgets[x]._id === widgetId) {   this.widgets[x] = widget; }
-    }
+    return this.http.put('http://localhost:3100/api/widget/' + widgetId, widget)
+      .map(
+        (res: Response) => {
+          return res.json();
+        }
+      );
   }
   deleteWidget(widgetId) {
-    for (let x = 0; x < this.widgets.length; x++) {
-      if (this.widgets[x]._id === widgetId) {
-        this.widgets.splice(x, 1 );
-      }
-    }
+    return this.http.delete('http://localhost:3100/api/widget/' + widgetId)
+      .map(
+        (res: Response) => {
+          return res.json();
+        }
+      );
   }
 }

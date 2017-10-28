@@ -14,7 +14,6 @@ module.exports = function(app){
   ];
 
   function createUser(req, res) {
-    console.log('create user server');
     var user = req.body;
     this.users.push(user);
     res.json(user);
@@ -43,7 +42,6 @@ module.exports = function(app){
 
   function findUserByCredentials(req,res)
   {
-    console.log('inside user server');
     var username = req.query["username"];
     var password = req.query["password"];
     if(username && password)

@@ -40,8 +40,6 @@ export class WebsiteEditComponent implements OnInit {
     this.webService.findWebsitesByUser(this.userId)
       .subscribe((websites: any) => {
         this.userWebsites = websites;
-        this.webName = this.webService.findWebsiteById(this.wid)['name'];
-        this.webDescription = this.webService.findWebsiteById(this.wid)['description'];
       });
   }
   EditWebsite() {
@@ -49,7 +47,6 @@ export class WebsiteEditComponent implements OnInit {
                             'name': this.websiteEditForm.value.name,
                             'developerId': this.userId,
                             'description': this.websiteEditForm.value.description };
-    alert(this.websiteEditForm.value.name);
     this.webService.updateWebsite(this.wid, editedWebsite )
       .subscribe(
         (websites: any) => {
@@ -60,9 +57,11 @@ export class WebsiteEditComponent implements OnInit {
   }
 
     DeleteWebsite() {
-      alert(this.userId);
-      alert('From outside' + this.wid);
-      this.webService.deleteWebsite(this.wid);
-      this.router.navigate(['user/' + this.userId, 'website']);
+      this.webService.deleteWebsite(this.wid)
+        .subscribe(
+          (website: any) => {
+            this.router.navigate(['user/' + this.userId, 'website']);
+          }
+        );
     }
 }

@@ -32,7 +32,6 @@ export class ProfileComponent implements OnInit {
       .subscribe((user: any) => {
         this.user = user;
         this.username = this.user.username;
-        alert(this.username);
         this.firstName = this.user.firstName;
         this.lastName = this.user.lastName;
         this.email = this.user.email;

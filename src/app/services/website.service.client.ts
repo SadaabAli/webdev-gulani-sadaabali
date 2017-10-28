@@ -23,7 +23,7 @@ export class WebsiteService {
 
   createWebsite(userId: String, website: any) {
     website.developerId = userId;
-    website._id = Math.random()
+    website._id = Math.floor(Math.random() * 10000).toString();
     return this.http.post('http://localhost:3100/api/user/' + userId + '/website', website)
       .map(
         (res: Response) => {
@@ -41,7 +41,6 @@ export class WebsiteService {
   }
 
   findWebsiteById(websiteId: String) {
-    alert('find website by id inside client');
     const url = 'http://localhost:3100/api/website/' + websiteId;
     return this.http.get(url)
       .map((response: Response) => {
@@ -50,18 +49,18 @@ export class WebsiteService {
   }
 
   updateWebsite(websiteId, website) {
-    alert('update website client');
-    const url = 'http://localhost:3100/api/user/' + website['developerId'] + '/website/' + websiteId;
+    const url = 'http://localhost:3100/api/website/' + websiteId;
     return this.http.put(url, website)
       .map((response: Response) => {
         return response.json();
       });
   }
   deleteWebsite(websiteId) {
-    for (let x = 0; x < this.websites.length; x++) {
-      if (this.websites[x]._id === websiteId) {
-        this.websites.splice(x, 1 );
-      }
-    }
+    return this.http.delete('http://localhost:3100/api/website/' + websiteId)
+      .map(
+        (res: Response) => {
+          return res.json();
+        }
+      );
   }
 }

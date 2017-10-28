@@ -19,6 +19,7 @@ export class WidgetHeaderComponent implements OnInit {
   pid: string;
   widgetId: string;
   widget = {};
+  widgets = [{}];
 
   ngOnInit() {
     this.activatedRoutes.params.subscribe(params => {
@@ -26,9 +27,14 @@ export class WidgetHeaderComponent implements OnInit {
       this.wid = params['wid'];
       this.pid = params['pid'];
       this.widgetId = params['wgid'];
-      this.widget = this.widgetService.findWidgetById(this.widgetId);
-      this.textHeader = this.widget['text'];
-      this.sizeHeader = this.widget['size'];
+      this.widgetService.findWidgetById(this.widgetId)
+        .subscribe(
+          (widget: any) => {
+            this.widget = widget;
+            this.textHeader = this.widget['text'];
+            this.sizeHeader = this.widget['size'];
+          }
+        );
     });
   }
 
@@ -36,12 +42,21 @@ export class WidgetHeaderComponent implements OnInit {
     this.widget['widgetType'] = 'HEADING';
     this.widget['text'] = this.textHeader;
     this.widget['size'] = this.sizeHeader;
-    this.widgetService.updateWidget(this.widgetId, this.widget);
+    this.widgetService.updateWidget(this.widgetId, this.widget)
+      .subscribe(
+        (widgets: any) => {
+          this.widgets = widgets;
+        }
+      );
   }
 
   deleteWidget() {
-    alert(this.widgetId);
-    this.widgetService.deleteWidget(this.widgetId);
+    this.widgetService.deleteWidget(this.widgetId)
+      .subscribe(
+        (widgets: any) => {
+          this.widgets = widgets;
+        }
+      );
   }
 
 }

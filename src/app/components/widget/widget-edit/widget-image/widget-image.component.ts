@@ -16,6 +16,8 @@ export class WidgetImageComponent implements OnInit {
   pid: string;
   wgid: string;
   widget = {};
+  widgets = [{}];
+  baseUrl = 'http://localhost:3100';
 
   constructor(private widgetService: WidgetService,
               private activatedRoutes: ActivatedRoute) {
@@ -27,9 +29,14 @@ export class WidgetImageComponent implements OnInit {
       this.wid = params['wid'];
       this.pid = params['pid'];
       this.wgid = params['wgid'];
-      this.widget = this.widgetService.findWidgetById(this.wgid);
-      this.width = this.widget['width'];
-      this.url = this.widget['url'];
+      this.widgetService.findWidgetById(this.wgid)
+        .subscribe(
+          (widget: any) => {
+            this.widget = widget;
+            this.width = this.widget['width'];
+            this.url = this.widget['url'];
+          }
+        );
     });
   }
 
@@ -37,11 +44,21 @@ export class WidgetImageComponent implements OnInit {
     this.widget['widgetType'] = 'IMAGE';
     this.widget['width'] = this.width;
     this.widget['url'] = this.url;
-    this.widgetService.updateWidget(this.wgid, this.widget);
+    this.widgetService.updateWidget(this.wgid, this.widget)
+      .subscribe(
+        (widgets: any) => {
+          this.widgets = widgets;
+        }
+      );
   }
 
   delete() {
-    this.widgetService.deleteWidget(this.wgid);
+    this.widgetService.deleteWidget(this.wgid)
+      .subscribe(
+        (widgets: any) => {
+          this.widgets = widgets;
+        }
+      );
   }
 
 }

@@ -24,15 +24,12 @@
 
 
 <div class="container-fluid page-margin">
-  <form>
+  <form ngNoForm action="{{baseUrl}}/api/upload" method="post" enctype="multipart/form-data">
     <div class="form-group">
-      <label for="url">URL</label>
-      <input type="url"
-             class="form-control"
-             id= "url"
-             placeholder="www.arsenal.com"
-             name="url"
-             [(ngModel)]="url">
+      <label>
+        Upload Image
+      </label>
+      <input name="myFile" type="file" class="form-control"/>
     </div>
 
     <div class="form-group">
@@ -46,6 +43,12 @@
              id="width"
              placeholder="100%">
     </div>
+    <input  name="widgetId" value="{{wgid}}"   style="display: none"/>
+    <input  name="websiteId" value="{{wid}}"   style="display: none"/>
+    <input  name="pageId" value="{{pid}}"   style="display: none"/>
+    <input  name="userId" value="{{userId}}"   style="display: none"/>
+    <button type="submit" class="btn btn-block btn-primary">Upload Image</button>
+    <br/>
     <div class="form-group">
       <a (click)="delete()"
          class="btn btn-danger btn-block "
