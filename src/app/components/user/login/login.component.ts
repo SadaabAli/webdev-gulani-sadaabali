@@ -26,10 +26,11 @@ export class LoginComponent implements OnInit {
     this.userService.findUserByCredentials(this.username, this.password )
       .subscribe( ( user: any ) => {
         if (user) {
+          alert(user._id);
+          this.errorFlag = false;
           this.router.navigate(['/user/' + user._id]);
         } else {
           this.errorFlag = true;
-          this.errorMsg = 'Please enter a valid username or password';
         }
       });
   }

@@ -37,7 +37,7 @@ module.exports = function(app){
     }
     else
     {
-      res.json({});
+      res.json(null);
     }
   }
 
@@ -61,7 +61,7 @@ module.exports = function(app){
       }
       else
       {
-        res.json({});
+        res.json(null);
       }
     }
     else if(username)
@@ -80,7 +80,7 @@ module.exports = function(app){
       }
       else
       {
-        res.json({});
+        res.json(null);
       }
     }
     return

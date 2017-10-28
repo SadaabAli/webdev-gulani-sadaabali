@@ -26,7 +26,7 @@
 </nav>
 
 <div class="container-fluid page-margin"></div>
-<div class="sadaab-widget" *ngFor="let widget of pageWidgets">
+<div class="sadaab-widget margin-bottom-widget" *ngFor="let widget of pageWidgets">
   <div [ngSwitch]="widget['widgetType']">
     <div *ngSwitchCase="'HEADING'">
       <div class= "sadaab-toolbar">
