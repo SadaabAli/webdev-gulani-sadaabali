@@ -24,6 +24,7 @@ export class UserService {
   };
 
   createUser(user: any) {
+    alert('user create client');
     user._id = Math.floor(Math.random() * 10000).toString();
     const url = environment.baseUrl + '/api/user/';
     return this.http.post(url, user)

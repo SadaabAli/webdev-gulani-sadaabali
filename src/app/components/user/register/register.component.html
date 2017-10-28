@@ -65,10 +65,10 @@
     <span class="help-block" *ngIf="!email.valid && email.touched">
       Please don't forget to enter your email!!
     </span>
-    <button class="btn btn-primary btn-block margin-top"
+    <a class="btn btn-primary btn-block margin-top"
        type="submit"
        [routerLink]= "['/login']"
-       [disabled]="!f.valid">Register</button>
+       (click)="RegisterNewUser()">Register</a>
     <a class="btn btn-danger btn-block margin-top"
        [routerLink]= "['/login']" >Cancel</a>
 

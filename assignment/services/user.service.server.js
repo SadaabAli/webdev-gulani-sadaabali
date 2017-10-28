@@ -14,6 +14,7 @@ module.exports = function(app){
   ];
 
   function createUser(req, res) {
+    console.log('user created' + req.body.username);
     var user = req.body;
     this.users.push(user);
     res.json(user);
