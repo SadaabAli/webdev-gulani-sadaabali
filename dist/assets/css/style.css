@@ -1,0 +1,55 @@
+.sadaab-navbar-color
+{
+  color:blue;
+  background-color: lightskyblue !important;
+}
+
+.sadaab-toolbar
+{
+  position: absolute;
+  right: 0px;
+  background-color: grey;
+  padding: 7px;
+  border-bottom-left-radius: 10px;
+  opacity: 0.7;
+}
+
+.sadaab-widget .sadaab-content
+{
+  width: 100%;
+}
+
+.margin-top
+{
+  margin-top: 10px;
+}
+
+.margin-bottom
+{
+  padding-bottom: 100px;
+}
+
+.split-nav-bar-glyp-margin
+{
+  padding-left: 300px
+}
+
+.split-nav-bar-text-margin
+{
+  padding-left: 3%;
+}
+
+.page-margin
+{
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  margin-top: 50px;
+  padding-top: 15px
+}
+
+.transparent-button
+{
+  border:1px solid black;
+  background-color: transparent;
+}
