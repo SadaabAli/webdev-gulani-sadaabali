@@ -23,7 +23,7 @@ export class WidgetHtmlComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoutes.params.subscribe(params => {
-      this.uId = params['userId'];
+      this.uId = params['uid'];
       this.wid = params['wid'];
       this.pid = params['pid'];
       this.wid = params['wgid'];
@@ -52,7 +52,7 @@ export class WidgetHtmlComponent implements OnInit {
     this.widgetService.deleteWidget(this.wid)
       .subscribe(
         (widgets: any) => {
-          this.router.navigate(['user/' + this.uId, 'website', this.wid, 'page', this.pid, 'widget']);
+          this.widgets = widgets;
         }
       );
   }

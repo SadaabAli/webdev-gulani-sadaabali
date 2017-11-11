@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  baseUrl : ''
+  baseUrl : 'https://gulani-sadaabali-webdev.herokuapp.com/',
+  baseFrontUrl: 'https://gulani-sadaabali-webdev.herokuapp.com/'
 };

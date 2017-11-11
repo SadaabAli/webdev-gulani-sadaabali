@@ -31,7 +31,7 @@ function updateWidget(id,widget)
 {
   return WidgetModel.update({_id: id}, widget);
 }
-function deleteWidget(req,res)
+function deleteWidget(id, widget)
 {
   return WidgetModel.remove({_id: id}, widget);
 }
