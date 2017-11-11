@@ -1,0 +1,51 @@
+<nav class="navbar navbar-default sadaab-navbar-color navbar-fixed-top nav-collapse collapsing" style="height:60px">
+  <div class="container-fluid">
+
+    <p class="navbar-text pull-left page-new-top-glyp-margin">
+      <a [routerLink]="['/user', uId, 'website', wid, 'page', pid, 'widget']" class="navbar-link">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+    </p>
+
+    <!--heading on the nav bar-->
+    <p class="navbar-header pull-left page-new-top-glyp-margin">
+      <a class="navbar-brand thick">
+        <b>HTML Widget Edit</b>
+      </a>
+    </p>
+
+    <!--tick mark-->
+    <p class="navbar-text pull-right page-new-top-glyp-margin">
+      <a (click)="update()" [routerLink]="['/user', uId, 'website', wid, 'page', pid, 'widget']" class="navbar-link">
+        <span class="glyphicon glyphicon-ok"></span>
+      </a>
+    </p>
+  </div>
+</nav>
+
+<div class="container-fluid">
+
+  <form>
+    <div class="form-group margin-top-huge">
+      <label>
+        Text
+      </label>
+      <quill-editor [(ngModel)]="text" name="text"></quill-editor>
+    </div>
+  </form>
+
+  <a (click)="delete()" class="btn btn-danger btn-block "
+     [routerLink]="['/user', uId, 'website', wid, 'page', pid, 'widget']">Delete</a>
+</div>
+
+<!-- Footer -->
+<nav class="navbar navbar-default sadaab-navbar-color navbar-fixed-bottom">
+  <div class="container-fluid">
+    <p class="navbar-text pull-right">
+      <a [routerLink]="['/user', uId]">
+        <span class="glyphicon glyphicon-user"></span>
+      </a>
+    </p>
+
+  </div>
+</nav>

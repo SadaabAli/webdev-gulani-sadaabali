@@ -23,7 +23,6 @@ export class WebsiteService {
 
   createWebsite(userId: String, website: any) {
     website.developerId = userId;
-    website._id = Math.floor(Math.random() * 10000).toString();
     return this.http.post(environment.baseUrl + '/api/user/' + userId + '/website', website)
       .map(
         (res: Response) => {

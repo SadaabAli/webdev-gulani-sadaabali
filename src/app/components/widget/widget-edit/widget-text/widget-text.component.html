@@ -1,0 +1,89 @@
+<nav class="navbar navbar-default sadaab-navbar-color navbar-fixed-top nav-collapse collapsing" style="height:60px">
+  <div class="container-fluid">
+
+    <p class="navbar-text pull-left page-new-top-glyp-margin">
+      <a [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget']" class="navbar-link">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+    </p>
+
+    <!--heading on the nav bar-->
+    <p class="navbar-header pull-left page-new-top-glyp-margin">
+      <a class="navbar-brand thick">
+        <b>Text Widget Edit</b>
+      </a>
+    </p>
+
+    <!--tick mark-->
+    <p class="navbar-text pull-right page-new-top-glyp-margin">
+      <a (click)="updateWidget()" [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget']" class="navbar-link">
+        <span class="glyphicon glyphicon-ok"></span>
+      </a>
+    </p>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <form>
+    <div class="form-group margin-top-huge">
+      <label>
+        Text
+      </label>
+      <input [(ngModel)]="text"
+             class="form-control"
+             name="text"/>
+    </div>
+
+    <div class="form-group">
+      <label>
+        Rows
+      </label>
+      <input [(ngModel)]="rows" class="form-control" type="number" name="rows"/>
+    </div>
+
+    <div class="form-group">
+      <label for="Name">Name</label>
+      <input [(ngModel)]="name"
+             type="text"
+             class="form-control"
+             id="Name"
+             name="name"
+             placeholder="Name">
+    </div>
+
+    <div class="form-group">
+      <label>Placeholder</label>
+      <input [(ngModel)]="placeholder" class="form-control" name="placeholder" required/>
+    </div>
+
+    <div class="form-group">
+      <input type="text"
+             readonly
+             value="Formatted"
+             class="form-control"/>
+      <span class="input-group-addon">
+         <input [(ngModel)]="formatted"
+                type="checkbox"
+                name="formatted"/>
+     </span>
+    </div>
+    <div class="form-group">
+      <a (click)="deleteWidget()"
+         class="btn btn-danger btn-block ">
+        Delete
+      </a>
+    </div>
+  </form>
+</div>
+
+<!-- Footer -->
+<nav class="navbar navbar-default sadaab-navbar-color navbar-fixed-bottom">
+  <div class="container-fluid">
+    <p class="navbar-text pull-right">
+      <a [routerLink]="['/user', userId]">
+        <span class="glyphicon glyphicon-user"></span>
+      </a>
+    </p>
+
+  </div>
+</nav>

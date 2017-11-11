@@ -31,7 +31,6 @@ export class WidgetService {
 
   createWidget(pageId: String, widget: any) {
     widget.pageId = pageId;
-    widget._id = Math.floor(Math.random() * 10000).toString();
     return this.http.post(environment.baseUrl + '/api/page/' + pageId + '/widget', widget)
       .map(
         (res: Response) => {

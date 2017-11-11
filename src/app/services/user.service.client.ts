@@ -24,7 +24,6 @@ export class UserService {
   };
 
   createUser(user: any) {
-    alert('user create client');
     user._id = Math.floor(Math.random() * 10000).toString();
     const url = environment.baseUrl + '/api/user/';
     return this.http.post(url, user)
@@ -44,9 +43,12 @@ export class UserService {
   }
 
   findUserByUsername(username: String) {
-    for (let x = 0; x < this.users.length; x++) {
-      if (this.users[x].username === username) {  return this.users[x]; }
-    }
+    alert('inside find user by username');
+    const url = environment.baseUrl + '/api/user?username=' + username;
+    return this.http.get(url)
+      .map((response: Response) => {
+        return response.json();
+      });
   }
 
   findUserByCredentials(username, password) {
