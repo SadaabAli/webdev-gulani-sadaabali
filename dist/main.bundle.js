@@ -957,29 +957,21 @@ var RegisterComponent = (function () {
     RegisterComponent.prototype.RegisterNewUser = function () {
         var _this = this;
         if (this.registerForm.value.password === this.registerForm.value.verifyPassword) {
-            var user_1 = {
+            alert('inside create user component');
+            var user = {
                 username: this.registerForm.value.username,
                 password: this.registerForm.value.password,
                 firstName: this.registerForm.value.firstName,
                 lastName: this.registerForm.value.lastName,
                 email: this.registerForm.value.email
             };
-            this.userService.findUserByUsername(this.registerForm.value.username)
+            this.userService.createUser(user)
                 .subscribe(function (user1) {
-                if (user1 === null) {
-                    console.log('No user with this username present');
-                    _this.userService.createUser(user_1)
-                        .subscribe(function (userFromServer) {
-                        console.log(userFromServer);
-                        console.log('inside navigate register component');
-                        _this.router.navigate(['user/', userFromServer._id]);
-                    });
-                }
+                _this.errorFlag = false;
+                _this.router.navigate(['user/' + user1._id]);
+            }, function (error) {
+                _this.errorFlag = true;
             });
-        }
-        else {
-            this.errorFlag = true;
-            this.errorMsg = 'Password mismatch!!';
         }
     };
     return RegisterComponent;
@@ -998,6 +990,16 @@ RegisterComponent = __decorate([
 ], RegisterComponent);
 
 var _a, _b, _c;
+//   this.userService.createUser(user)
+//     .subscribe((userFromServer: any) => {
+//     console.log(userFromServer);
+//     console.log('inside navigate register component');
+//     this.router.navigate(['user/', userFromServer._id]);
+//   });
+// }else {
+//   this.errorFlag = true;
+//   this.errorMsg = 'Password mismatch!!';
+// }
 //# sourceMappingURL=register.component.js.map
 
 /***/ }),
@@ -2242,7 +2244,6 @@ var UserService = (function () {
         };
     }
     UserService.prototype.createUser = function (user) {
-        user._id = Math.floor(Math.random() * 10000).toString();
         var url = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].baseUrl + '/api/user/';
         return this.http.post(url, user)
             .map(function (res) {
@@ -2257,7 +2258,6 @@ var UserService = (function () {
         });
     };
     UserService.prototype.findUserByUsername = function (username) {
-        alert('inside find user by username');
         var url = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].baseUrl + '/api/user?username=' + username;
         return this.http.get(url)
             .map(function (response) {

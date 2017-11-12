@@ -12,6 +12,7 @@ export class RegisterComponent implements OnInit {
   @ViewChild('f') registerForm: NgForm;
   errorFlag: boolean;
   errorMsg = '';
+
   constructor(private router: Router, private userService: UserService) {
   }
 
@@ -19,7 +20,8 @@ export class RegisterComponent implements OnInit {
   }
 
   RegisterNewUser() {
-    if ( this.registerForm.value.password === this.registerForm.value.verifyPassword) {
+    if (this.registerForm.value.password === this.registerForm.value.verifyPassword) {
+      alert('inside create user component');
       const user = {
         username: this.registerForm.value.username,
         password: this.registerForm.value.password,
@@ -27,21 +29,26 @@ export class RegisterComponent implements OnInit {
         lastName: this.registerForm.value.lastName,
         email: this.registerForm.value.email
       };
-      this.userService.findUserByUsername(this.registerForm.value.username)
-        .subscribe(( user1: any ) => {
-        if (user1 === null) {
-          console.log('No user with this username present');
-          this.userService.createUser(user)
-            .subscribe((userFromServer: any) => {
-            console.log(userFromServer);
-            console.log('inside navigate register component');
-            this.router.navigate(['user/', userFromServer._id]);
-            });
-        }
-        });
-    }else {
-      this.errorFlag = true;
-      this.errorMsg = 'Password mismatch!!';
+      this.userService.createUser(user)
+        .subscribe(
+          (user1: any) => {
+            this.errorFlag = false;
+            this.router.navigate(['user/' + user1._id]);
+          },
+          (error: any) => {
+            this.errorFlag = true;
+          }
+        );
     }
   }
 }
+    //   this.userService.createUser(user)
+    //     .subscribe((userFromServer: any) => {
+    //     console.log(userFromServer);
+    //     console.log('inside navigate register component');
+    //     this.router.navigate(['user/', userFromServer._id]);
+    //   });
+    // }else {
+    //   this.errorFlag = true;
+    //   this.errorMsg = 'Password mismatch!!';
+    // }

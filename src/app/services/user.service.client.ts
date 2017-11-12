@@ -24,7 +24,6 @@ export class UserService {
   };
 
   createUser(user: any) {
-    user._id = Math.floor(Math.random() * 10000).toString();
     const url = environment.baseUrl + '/api/user/';
     return this.http.post(url, user)
       .map(
@@ -43,7 +42,6 @@ export class UserService {
   }
 
   findUserByUsername(username: String) {
-    alert('inside find user by username');
     const url = environment.baseUrl + '/api/user?username=' + username;
     return this.http.get(url)
       .map((response: Response) => {
