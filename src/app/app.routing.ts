@@ -21,13 +21,15 @@ import {WidgetListComponent} from './components/widget/widget-list/widget-list.c
 import {WidgetHeaderComponent} from './components/widget/widget-edit/widget-header/widget-header.component';
 import {WidgetImageComponent} from './components/widget/widget-edit/widget-image/widget-image.component';
 import {WidgetYoutubeComponent} from './components/widget/widget-edit/widget-youtube/widget-youtube.component';
+import {YelpApiTestComponent} from './Yelp-API-test/yelp-api-test/yelp-api-test.component';
+import {AuthGuard} from "./services/auth-guard.service";
 
 const APP_ROUTES: Routes = [
   {path: '', component : HomeComponent},
   {path: 'test', component: TestComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'user/:uid', component: ProfileComponent},
+  {path: 'user', component: ProfileComponent, canActivate: [AuthGuard]},
   {path: 'user/:uid/website/new', component: WebsiteNewComponent},
   {path: 'user/:uid/website/:wid', component: WebsiteEditComponent},
   {path: 'user/:uid/website', component: WebsiteListComponent},
@@ -39,7 +41,8 @@ const APP_ROUTES: Routes = [
   {path: 'user/:uid/website/:wid/page/:pid/widget', component: WidgetListComponent},
   {path: 'widget-header', component: WidgetHeaderComponent},
   {path: 'widget-image', component: WidgetImageComponent},
-  {path: 'widget-youtube', component: WidgetYoutubeComponent}
+  {path: 'widget-youtube', component: WidgetYoutubeComponent},
+  {path: 'yelp', component: YelpApiTestComponent}
 ];
 
 // Export the routes as module providers

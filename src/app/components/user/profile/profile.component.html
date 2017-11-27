@@ -63,7 +63,7 @@
     <a class="btn btn-primary btn-block margin-top"
        [routerLink]="['/user', userId, 'website']">Websites</a>
     <a class="btn btn-danger btn-block margin-top"
-       [routerLink]= "['/login']" >Logout</a>
+       (click)="logout()" >Logout</a>
 
   </div>
 

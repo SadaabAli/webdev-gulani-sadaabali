@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {UserService} from '../../../services/user.service.client';
 import {NgForm} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
+import {SharedService} from "../../../services/shared.service.client";
 
 @Component({
   selector: 'app-profile',
@@ -20,23 +21,41 @@ export class ProfileComponent implements OnInit {
   lastName: String;
   email: String;
   password: String;
-  constructor(private userService: UserService, private activatedRoute: ActivatedRoute) { }
+  constructor(private sharedService: SharedService,
+              private userService: UserService,
+              private activatedRoute: ActivatedRoute,
+              private  router: Router) { }
+
+  logout() {
+    this.userService.logout()
+      .subscribe((status) => {
+        this.router.navigate(['/login']);
+      });
+  }
 
   ngOnInit() {
-    this.activatedRoute.params
-      .subscribe(
-        (params: any) => {
-          this.userId = params['uid'];
-        });
-    this.userService.findUserById(this.userId)
-      .subscribe((user: any) => {
-        this.user = user;
-        this.username = this.user.username;
-        this.firstName = this.user.firstName;
-        this.lastName = this.user.lastName;
-        this.email = this.user.email;
-        this.password = this.user.password;
-      });
+    // this.activatedRoute.params
+    //   .subscribe(
+    //     (params: any) => {
+    //       this.userId = params['uid'];
+    //     });
+
+    console.log(this.sharedService.user);
+    this.user = this.sharedService.user;
+    this.username = this.user.username;
+    this.firstName = this.user.firstName;
+    this.lastName = this.user.lastName;
+    this.email = this.user.email;
+    this.password = this.user.password;
+    // this.userService.findUserById(this.userId)
+    //   .subscribe((user: any) => {
+    //     this.user = user;
+    //     this.username = this.user.username;
+    //     this.firstName = this.user.firstName;
+    //     this.lastName = this.user.lastName;
+    //     this.email = this.user.email;
+    //     this.password = this.user.password;
+    //   });
   }
   EditProfile() {
     // this.user  = this.userService.findUserById(this.userId);

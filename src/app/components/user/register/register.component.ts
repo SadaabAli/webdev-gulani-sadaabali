@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 import {UserService} from '../../../services/user.service.client';
+import {SharedService} from "../../../services/shared.service.client";
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,7 @@ export class RegisterComponent implements OnInit {
   errorFlag: boolean;
   errorMsg = '';
 
-  constructor(private router: Router, private userService: UserService) {
+  constructor(private sharedService: SharedService, private router: Router, private userService: UserService) {
   }
 
   ngOnInit() {
@@ -29,16 +30,21 @@ export class RegisterComponent implements OnInit {
         lastName: this.registerForm.value.lastName,
         email: this.registerForm.value.email
       };
-      this.userService.createUser(user)
-        .subscribe(
-          (user1: any) => {
-            this.errorFlag = false;
-            this.router.navigate(['user/' + user1._id]);
-          },
-          (error: any) => {
-            this.errorFlag = true;
-          }
-        );
+      this.userService.register(this.registerForm.value.username, this.registerForm.value.password)
+        .subscribe((regUser) => {
+          this.sharedService.user = regUser;
+          this.router.navigate(['/user']);
+        });
+      // this.userService.createUser(user)
+      //   .subscribe(
+      //     (user1: any) => {
+      //       this.errorFlag = false;
+      //       this.router.navigate(['user/' + user1._id]);
+      //     },
+      //     (error: any) => {
+      //       this.errorFlag = true;
+      //     }
+      //   );
     }
   }
 }

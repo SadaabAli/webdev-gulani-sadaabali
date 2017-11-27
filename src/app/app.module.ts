@@ -30,7 +30,10 @@ import { PageService } from './services/page.service.client';
 import { WidgetService } from './services/widget.service.client';
 import { WidgetHtmlComponent } from './components/widget/widget-edit/widget-html/widget-html.component';
 import { WidgetTextComponent } from './components/widget/widget-edit/widget-text/widget-text.component';
-
+import { YelpApiTestComponent } from './Yelp-API-test/yelp-api-test/yelp-api-test.component';
+import { YelpServiceClient} from './services/yelp.service.client';
+import {SharedService} from './services/shared.service.client';
+import {AuthGuard} from "./services/auth-guard.service";
 
 @NgModule({
   // Declare components here
@@ -54,7 +57,8 @@ import { WidgetTextComponent } from './components/widget/widget-edit/widget-text
     WidgetImageComponent,
     WidgetYoutubeComponent,
     WidgetHtmlComponent,
-    WidgetTextComponent
+    WidgetTextComponent,
+    YelpApiTestComponent
   ],
   imports: [
     BrowserModule,
@@ -63,8 +67,18 @@ import { WidgetTextComponent } from './components/widget/widget-edit/widget-text
     Routing,
     QuillEditorModule
   ],
+
   // Client Side services here
-  providers: [ TestService, UserService, WebsiteService, PageService, WidgetService],
+  providers: [
+    TestService,
+    UserService,
+    WebsiteService,
+    PageService,
+    WidgetService,
+    YelpServiceClient,
+    SharedService,
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
