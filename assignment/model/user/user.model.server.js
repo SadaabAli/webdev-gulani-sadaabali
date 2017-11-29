@@ -12,11 +12,16 @@ UserModel.findUserbyUsername = findUserbyUsername;
 UserModel.updateUser = UpdateUser;
 UserModel.deleteUser = deleteUser;
 UserModel.findUserByFacebookId = findUserByFacebookId;
+UserModel.facebookStrategy = facebookStrategy;
 
 module.exports = UserModel;
 
+function facebookStrategy(token, refreshToken, profile, done) {
+  UserModel.findUserByFacebookId(profile.id)
+}
+
 function findUserByFacebookId(facebookId) {
-  return User.findOne({'facebook.id': facebookId});
+  return UserModel.findOne({'facebook.id': facebookId});
 }
 
 function  findUserbyUsername(username) {

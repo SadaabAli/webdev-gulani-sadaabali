@@ -45,9 +45,15 @@ module.exports = function (app) {
     var size          = myFile.size;
     var mimetype      = myFile.mimetype;
 
-    widget = getWidgetById(widgetId);
-    widget.url = 'assets/uploads/'+filename;
-    widget.width = width;
+    var newWidget = {
+      url: '/assets/uploads/'+filename,
+      width: width
+    }
+
+    WidgetModel.updateWidget(widgetId, newWidget)
+      .then(function (status) {
+        res.json(status);
+      });
 
     var callbackUrl   = "/assignment/#/user/"+userId+"/website/"+websiteId+ '/page' + pageId + '/widget';
 

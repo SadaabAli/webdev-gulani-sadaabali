@@ -3,20 +3,27 @@ module.exports = function(app){
   var userModel = require("../model/user/user.model.server");
   var bcrypt = require("bcrypt-nodejs");
 
+
+  var passport = require('passport');
+  var LocalStrategy = require('passport-local').Strategy;
+  var FacebookStrategy = require('passport-facebook').Strategy;
+
+  var facebookConfig = {
+    clientID     : "2023662714547622",
+    clientSecret : "6a6e99ef0130b2d41f7ac687c1e0996c",
+    callbackURL  : "http://localhost:3100/auth/facebook/callback"
+  };
+
+  passport.serializeUser(serializeUser);
+  passport.deserializeUser(deserializeUser);
+  passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+
   app.post("/api/user", createUser);
   // app.get("/api/user?username=username", findUserByUsername);
   app.get("/api/user", findUserByCredentials);
   app.get("/api/user/:userId", findUserById);
   app.put("/api/user/:userId", updateUser);
   app.delete("/api/user/:userId", deleteUser);
-
-  var passport = require('passport');
-  var LocalStrategy = require('passport-local').Strategy;
-  var FacebookStrategy = require('passport-facebook').Strategy;
-
-  passport.serializeUser(serializeUser);
-  passport.deserializeUser(deserializeUser);
-
   app.post("/api/register", register);
   app.post('/api/login', passport.authenticate('local'), login);
   app.post('/api/logout', logout);
@@ -25,9 +32,34 @@ module.exports = function(app){
 
   app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
-      successRedirect: '/#/user',
-      failureRedirect: '/#/login'
+      successRedirect: 'http://localhost:4200/user',
+      failureRedirect: 'http://localhost:4200/login'
     }));
+
+  function facebookStrategy(token, refreshToken, profile, done) {
+    console.log("hi");
+    userModel
+      .findUserByFacebookId(profile.id)
+      .then(function (user) {
+        if (user) {
+          return done(null, user);
+        } else {
+          const user = {
+            firstName: profile.name['givenName'],
+            lastName: profile.name['familyName'],
+            username: profile.username,
+            facebook: {
+              id: profile.id,
+              token: token
+            }
+          }
+          userModel.createUser(user)
+            .then(function (user) {
+              return done(null, user);
+            })
+        }
+      })
+  }
 
   function loggedin(req, res) {
     res.send(req.isAuthenticated() ? req.user : '0');
@@ -51,13 +83,13 @@ module.exports = function(app){
     userModel
       .createUser(user)
       .then(
-        function(user){
-          if(user){
-            req.login(user, function(err) {
+        function(newUser){
+          if(newUser){
+            req.login(newUser, function(err) {
               if(err) {
                 res.status(400).send(err);
               } else {
-                res.json(user);
+                res.json(newUser);
               }
             });
           }
@@ -67,7 +99,7 @@ module.exports = function(app){
 
   function localStrategy(username, password, done) {
     userModel
-      .findUserByCredentials(username, password)
+      .findUserbyUsername(username)
       .then(
         function(user) {
           if(user.username === username && bcrypt.compareSync(password, user.password)) {

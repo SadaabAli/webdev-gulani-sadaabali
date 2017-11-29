@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
         lastName: this.registerForm.value.lastName,
         email: this.registerForm.value.email
       };
-      this.userService.register(this.registerForm.value.username, this.registerForm.value.password)
+      this.userService.register(user)
         .subscribe((regUser) => {
           this.sharedService.user = regUser;
           this.router.navigate(['/user']);
