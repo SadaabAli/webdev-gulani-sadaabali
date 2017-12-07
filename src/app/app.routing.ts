@@ -22,7 +22,8 @@ import {WidgetHeaderComponent} from './components/widget/widget-edit/widget-head
 import {WidgetImageComponent} from './components/widget/widget-edit/widget-image/widget-image.component';
 import {WidgetYoutubeComponent} from './components/widget/widget-edit/widget-youtube/widget-youtube.component';
 import {YelpApiTestComponent} from './Yelp-API-test/yelp-api-test/yelp-api-test.component';
-import {AuthGuard} from "./services/auth-guard.service";
+import {AuthGuard} from './services/auth-guard.service';
+import {FlickrImageSearchComponent} from './components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component';
 
 const APP_ROUTES: Routes = [
   {path: '', component : HomeComponent},
@@ -30,19 +31,20 @@ const APP_ROUTES: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'user', component: ProfileComponent, canActivate: [AuthGuard]},
-  {path: 'user/:uid/website/new', component: WebsiteNewComponent},
-  {path: 'user/:uid/website/:wid', component: WebsiteEditComponent},
-  {path: 'user/:uid/website', component: WebsiteListComponent},
-  {path: 'user/:uid/website/:wid/page/new', component: PageNewComponent},
-  {path: 'user/:uid/website/:wid/page/:pid', component: PageEditComponent},
-  {path: 'user/:uid/website/:wid/page', component: PageListComponent},
-  {path: 'user/:uid/website/:wid/page/:pid/widget/new', component: WidgetChooserComponent},
-  {path: 'user/:uid/website/:wid/page/:pid/widget/:wgid', component: WidgetEditComponent},
-  {path: 'user/:uid/website/:wid/page/:pid/widget', component: WidgetListComponent},
+  {path: 'user/website/new', component: WebsiteNewComponent},
+  {path: 'user/website/:wid', component: WebsiteEditComponent},
+  {path: 'user/website', component: WebsiteListComponent},
+  {path: 'user/website/:wid/page/new', component: PageNewComponent},
+  {path: 'user/website/:wid/page/:pid', component: PageEditComponent},
+  {path: 'user/website/:wid/page', component: PageListComponent},
+  {path: 'user/website/:wid/page/:pid/widget/new', component: WidgetChooserComponent},
+  {path: 'user/website/:wid/page/:pid/widget/:wgid', component: WidgetEditComponent},
+  {path: 'user/website/:wid/page/:pid/widget', component: WidgetListComponent},
   {path: 'widget-header', component: WidgetHeaderComponent},
   {path: 'widget-image', component: WidgetImageComponent},
   {path: 'widget-youtube', component: WidgetYoutubeComponent},
-  {path: 'yelp', component: YelpApiTestComponent}
+  {path: 'yelp', component: YelpApiTestComponent},
+  {path: 'user/website/:wid/page/:pid/widget/:wgid/flickr', component: FlickrImageSearchComponent, canActivate: [AuthGuard]}
 ];
 
 // Export the routes as module providers

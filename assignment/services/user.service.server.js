@@ -1,12 +1,11 @@
 module.exports = function(app){
 
   var userModel = require("../model/user/user.model.server");
-  var bcrypt = require("bcrypt-nodejs");
-
 
   var passport = require('passport');
   var LocalStrategy = require('passport-local').Strategy;
   var FacebookStrategy = require('passport-facebook').Strategy;
+  var bcrypt = require("bcrypt-nodejs");
 
   var facebookConfig = {
     clientID     : "2023662714547622",

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {WidgetService} from '../../../services/widget.service.client';
 import {UserService} from '../../../services/user.service.client';
+import {SharedService} from "../../../services/shared.service.client";
 
 @Component({
   selector: 'app-widget-chooser',
@@ -10,7 +11,6 @@ import {UserService} from '../../../services/user.service.client';
 })
 export class WidgetChooserComponent implements OnInit {
 
-  uid: String;
   pid: String;
   wid: String;
   newWidget: String;
@@ -18,10 +18,10 @@ export class WidgetChooserComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
               private userService: UserService,
               private router: Router,
-              private widgetService: WidgetService) { }
+              private widgetService: WidgetService,
+              private sharedService: SharedService) { }
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
-      this.uid = params['uid'];
       this.wid = params['wid'];
       this.pid = params['pid'];
     });
@@ -32,7 +32,7 @@ export class WidgetChooserComponent implements OnInit {
     this.widgetService.createWidget(this.pid, widget )
       .subscribe(
         (new_widget: any) => {
-          this.router.navigate(['user/', this.uid, 'website', this.wid, 'page', this.pid, 'widget', new_widget['_id']]);
+          this.router.navigate(['user/', 'website', this.wid, 'page', this.pid, 'widget', new_widget['_id']]);
         }
       );
   }

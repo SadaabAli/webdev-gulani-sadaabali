@@ -33,7 +33,10 @@ import { WidgetTextComponent } from './components/widget/widget-edit/widget-text
 import { YelpApiTestComponent } from './Yelp-API-test/yelp-api-test/yelp-api-test.component';
 import { YelpServiceClient} from './services/yelp.service.client';
 import {SharedService} from './services/shared.service.client';
-import {AuthGuard} from "./services/auth-guard.service";
+import {AuthGuard} from './services/auth-guard.service';
+import {SortableDirective} from './components/widget/widget-list/sortable.directive';
+import { FlickrImageSearchComponent } from './components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component';
+import { FlickrService} from './services/flickr.service.client';
 
 @NgModule({
   // Declare components here
@@ -58,7 +61,9 @@ import {AuthGuard} from "./services/auth-guard.service";
     WidgetYoutubeComponent,
     WidgetHtmlComponent,
     WidgetTextComponent,
-    YelpApiTestComponent
+    YelpApiTestComponent,
+    SortableDirective,
+    FlickrImageSearchComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +82,8 @@ import {AuthGuard} from "./services/auth-guard.service";
     WidgetService,
     YelpServiceClient,
     SharedService,
-    AuthGuard
+    AuthGuard,
+    FlickrService
   ],
   bootstrap: [AppComponent]
 })

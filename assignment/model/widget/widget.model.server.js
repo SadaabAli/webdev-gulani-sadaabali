@@ -35,3 +35,29 @@ function deleteWidget(id, widget)
 {
   return WidgetModel.remove({_id: id}, widget);
 }
+
+function reorderWidgets(pageId, startIndex, endIndex) {
+  return WidgetModel.find({_page:pageId}, function (err,widgets) {
+    WidgetModel.forEach (function (widget) {
+      if(startIndex < endIndex){
+        if(widget.position === startIndex){
+          widget.position = endIndex;
+          widget.save();
+        }else if (widget.position > startIndex
+          && widget.position <= endIndex){
+          widget.position --;
+          widget.save();
+        }else {
+          if(widget.position === startIndex){
+            widget.position = endIndex;
+            widget.save();
+          } else if(widget.position < startIndex
+            && widget.position >= endIndex){
+            widget.position ++;
+            widget.save();
+          }
+        }
+      }
+    })
+  })
+}

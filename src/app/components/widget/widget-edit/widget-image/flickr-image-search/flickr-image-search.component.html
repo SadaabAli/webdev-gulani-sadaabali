@@ -1,0 +1,60 @@
+<nav class="navbar sadaab-navbar-color navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+
+    <!--tick mark-->
+    <p class="navbar-text pull-left page-new-top-glyp-margin">
+      <a [routerLink]="['/user', 'website', websiteId, 'page']" class="navbar-link">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+    </p>
+
+    <!--heading on the nav bar-->
+    <p class="navbar-header pull-left page-new-top-glyp-margin">
+      <a class="navbar-brand thick">
+        <b>Choose an Image from Flickr API</b>
+      </a>
+    </p>
+
+    <!--&lt;!&ndash;tick mark&ndash;&gt;-->
+    <!--<p class="navbar-text pull-right page-new-top-glyp-margin">-->
+      <!--<a [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget', 'new']" class="navbar-link">-->
+        <!--<span class="glyphicon glyphicon-plus"></span>-->
+      <!--</a>-->
+    <!--</p>-->
+
+  </div>
+</nav>
+
+<div class = "container margin-top-flickr">
+  <div class="input-group">
+    <input [(ngModel)]="searchText" type="text" class="form-control">
+    <span class="input-group-btn">
+            <a (click)="searchPhotos()" class="btn btn-default" type="button">
+                <span class="glyphicon glyphicon-search"></span>
+            </a>
+        </span>
+  </div>
+
+  <div class="row">
+    <div *ngFor = "let pic of photos['photo']"
+         class="col-xs-4">
+      <img    (click)="selectPhoto(pic)"
+              width="100%"
+              [src] = "['https://farm' + pic.farm + '.staticflickr.com/' + pic.server + '/' + pic.id + '_' + pic.secret + '_s.jpg']"/>
+
+      <!--[src] = "https://farm" + photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + "_" + "s.jpg"/>-->
+    </div>
+  </div>
+
+</div>
+
+<nav class="sadaab-navbar-color navbar navbar-default navbar-fixed-bottom margin-top">
+  <div class="container-fluid">
+    <p class="navbar-text pull-right">
+      <a [routerLink]="['/user']">
+        <span class="glyphicon glyphicon-user"></span>
+      </a>
+    </p>
+
+  </div>
+</nav>

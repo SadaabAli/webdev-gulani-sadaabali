@@ -12,7 +12,7 @@ import {SharedService} from "../../../services/shared.service.client";
 export class RegisterComponent implements OnInit {
   @ViewChild('f') registerForm: NgForm;
   errorFlag: boolean;
-  errorMsg = '';
+  error = '';
 
   constructor(private sharedService: SharedService, private router: Router, private userService: UserService) {
   }
@@ -22,7 +22,6 @@ export class RegisterComponent implements OnInit {
 
   RegisterNewUser() {
     if (this.registerForm.value.password === this.registerForm.value.verifyPassword) {
-      alert('inside create user component');
       const user = {
         username: this.registerForm.value.username,
         password: this.registerForm.value.password,
@@ -45,6 +44,8 @@ export class RegisterComponent implements OnInit {
       //       this.errorFlag = true;
       //     }
       //   );
+    } else {
+      this.error = 'Passwords do not match!';
     }
   }
 }

@@ -4,7 +4,7 @@ import {Router} from '@angular/router';
 import {UserService} from '../../../services/user.service.client';
 import {NgForm} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
-import {SharedService} from "../../../services/shared.service.client";
+import {SharedService} from '../../../services/shared.service.client';
 
 @Component({
   selector: 'app-profile',

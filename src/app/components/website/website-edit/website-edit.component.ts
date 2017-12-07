@@ -3,6 +3,7 @@ import {NgForm} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../../services/user.service.client';
 import {WebsiteService} from '../../../services/website.service.client';
+import {SharedService} from '../../../services/shared.service.client';
 
 @Component({
   selector: 'app-website-edit',
@@ -12,6 +13,7 @@ import {WebsiteService} from '../../../services/website.service.client';
 export class WebsiteEditComponent implements OnInit {
   @ViewChild('f') websiteEditForm: NgForm;
 
+  user: {};
   userId: String;
   wid: String;
   userWebsites = [{}];
@@ -20,9 +22,18 @@ export class WebsiteEditComponent implements OnInit {
   constructor(private webService: WebsiteService,
               private activatedRoute: ActivatedRoute,
               private userService: UserService,
-              private router: Router) { }
+              private router: Router,
+              private  sharedService: SharedService) { }
+
+  getUser() {
+    this.user = this.sharedService.user;
+    console.log(this.user);
+    this.userId = this.user['_id'];
+    console.log(this.userId);
+  }
 
   ngOnInit() {
+    this.getUser();
     this.activatedRoute.params
       .subscribe(
         (params: any) => {
@@ -51,7 +62,7 @@ export class WebsiteEditComponent implements OnInit {
       .subscribe(
         (websites: any) => {
           this.userWebsites = websites;
-          this.router.navigate(['user/' + this.userId, 'website']);
+          this.router.navigate(['user/', 'website']);
         }
       );
   }
@@ -60,7 +71,7 @@ export class WebsiteEditComponent implements OnInit {
       this.webService.deleteWebsite(this.wid)
         .subscribe(
           (website: any) => {
-            this.router.navigate(['user/' + this.userId, 'website']);
+            this.router.navigate(['user/', 'website']);
           }
         );
     }

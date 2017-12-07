@@ -60,6 +60,20 @@ module.exports = function (app) {
     res.redirect(callbackUrl);
   }
 
+  function reorderWidgets(req,res) {
+    var pageId = req.params.pageId;
+    var startIndex = parseInt(req.query.start);
+    var endIndex = parseInt(req.query.end);
+    widgetModel
+      .reorderWidgets(pageId, startIndex, endIndex)
+      .then(function (stats) {
+        res.send(200);
+
+      }, function (err) {
+        res.sendStatus(400).send(err);
+      });
+
+  }
   function createWidget(req,res)
   {
     var pageId = req.params['pageId'];
@@ -95,13 +109,11 @@ module.exports = function (app) {
     var widget = req.body;
     WidgetModel.updateWidget(widgetId, widget)
       .then(function (status) {
-        return WidgetModel.findWidgetsByPageId(widget.pageId);
-      })
-      .then(function (widgets){
-        res.json(widgets);
-        return;
-      }
-      );
+          res.json(status);
+        },
+        function (err) {
+          res.sendStatus(404).send(err);
+        });
   }
   function deleteWidget(req,res)
   {

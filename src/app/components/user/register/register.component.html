@@ -1,5 +1,10 @@
 <form (ngSubmit) = "RegisterNewUser()" #f="ngForm">
 
+  <div *ngIf="error"
+       class="alert alert-danger">
+    {{error}}
+  </div>
+
   <div class="container-fluid">
     <h1>Register</h1>
     <input placeholder="username"

@@ -14,7 +14,6 @@ export class WidgetHeaderComponent implements OnInit {
 
   textHeader: string;
   sizeHeader: string;
-  uId: string;
   wid: string;
   pid: string;
   widgetId: string;
@@ -23,7 +22,6 @@ export class WidgetHeaderComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoutes.params.subscribe(params => {
-      this.uId = params['uid'];
       this.wid = params['wid'];
       this.pid = params['pid'];
       this.widgetId = params['wgid'];

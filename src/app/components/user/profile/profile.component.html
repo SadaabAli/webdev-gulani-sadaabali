@@ -61,7 +61,7 @@
       name="last-name">
 
     <a class="btn btn-primary btn-block margin-top"
-       [routerLink]="['/user', userId, 'website']">Websites</a>
+       [routerLink]="['/user', 'website']">Websites</a>
     <a class="btn btn-danger btn-block margin-top"
        (click)="logout()" >Logout</a>
 
@@ -71,7 +71,7 @@
   <nav class="navbar sadaab-navbar-color navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
       <p class="navbar-text pull-right">
-        <a [routerLink]="['/user',userId]">
+        <a [routerLink]="['/user']">
           <span class="glyphicon glyphicon-user"></span>
         </a>
       </p>

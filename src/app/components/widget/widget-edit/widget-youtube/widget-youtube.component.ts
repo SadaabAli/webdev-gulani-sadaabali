@@ -11,7 +11,6 @@ export class WidgetYoutubeComponent implements OnInit {
 
   url: string;
   width: string;
-  userId: string;
   wid: string;
   pid: string;
   wgid: string;
@@ -23,7 +22,6 @@ export class WidgetYoutubeComponent implements OnInit {
   }
   ngOnInit() {
     this.activatedRoutes.params.subscribe(params => {
-      this.userId = params['uid'];
       this.wid = params['wid'];
       this.pid = params['pid'];
       this.wgid = params['wgid'];

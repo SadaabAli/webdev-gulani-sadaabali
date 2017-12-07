@@ -3,7 +3,7 @@
 
     <!--tick mark-->
     <p class="navbar-text pull-left page-new-top-glyp-margin">
-      <a [routerLink]="['/user', userId, 'website', websiteId, 'page']" class="navbar-link">
+      <a [routerLink]="['/user', 'website', websiteId, 'page']" class="navbar-link">
         <span class="glyphicon glyphicon-chevron-left"></span>
       </a>
     </p>
@@ -17,7 +17,7 @@
 
     <!--tick mark-->
     <p class="navbar-text pull-right page-new-top-glyp-margin">
-      <a [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget', 'new']" class="navbar-link">
+      <a [routerLink]="['/user', 'website', websiteId, 'page', pageId, 'widget', 'new']" class="navbar-link">
         <span class="glyphicon glyphicon-plus"></span>
       </a>
     </p>
@@ -26,65 +26,67 @@
 </nav>
 
 <div class="container-fluid page-margin"></div>
-<div class="sadaab-widget margin-bottom-widget" *ngFor="let widget of pageWidgets">
-  <div [ngSwitch]="widget['widgetType']">
-    <div *ngSwitchCase="'HEADING'">
-      <div class= "sadaab-toolbar">
-        <a [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget', widget['_id']]">
-          <span class="glyphicon glyphicon-cog"></span>
-        </a>
-        <span class="glyphicon glyphicon-menu-hamburger"></span>
+<div class="widget-list">
+  <div class="sadaab-widget margin-bottom-widget" *ngFor="let widget of pageWidgets">
+    <div [ngSwitch]="widget['widgetType']">
+      <div *ngSwitchCase="'HEADING'">
+        <div class= "sadaab-toolbar">
+          <a [routerLink]="['/user', 'website', websiteId, 'page', pageId, 'widget', widget['_id']]">
+            <span class="glyphicon glyphicon-cog"></span>
+          </a>
+          <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </div>
+        <h1>{{widget['text']}}</h1>
       </div>
-      <h1>{{widget['text']}}</h1>
-    </div>
 
-    <div *ngSwitchCase="'HTML'">
-      <div class= "sadaab-toolbar">
-        <a [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget', widget['_id']]">
-          <span class="glyphicon glyphicon-cog"></span>
-        </a>
-        <span class="glyphicon glyphicon-menu-hamburger"></span>
+      <div *ngSwitchCase="'HTML'">
+        <div class= "sadaab-toolbar">
+          <a [routerLink]="['/user', 'website', websiteId, 'page', pageId, 'widget', widget['_id']]">
+            <span class="glyphicon glyphicon-cog"></span>
+          </a>
+          <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </div>
+        <div [innerHtml]="widget['text']"></div>
       </div>
-      <div [innerHtml]="widget['text']"></div>
-    </div>
 
-    <div *ngSwitchCase="'TEXT'">
-      <div class="sadaab-toolbar">
-        <a [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget', widget['_id']]">
-          <span class="glyphicon glyphicon-cog"></span>
-        </a>
-        <span class="glyphicon glyphicon-menu-hamburger"></span>
+      <div *ngSwitchCase="'TEXT'">
+        <div class="sadaab-toolbar">
+          <a [routerLink]="['/user', 'website', websiteId, 'page', pageId, 'widget', widget['_id']]">
+            <span class="glyphicon glyphicon-cog"></span>
+          </a>
+          <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </div>
+        <div *ngIf="widget['formatted']">
+          <quill-editor [(ngModel)]="widget['text']" name="text"></quill-editor>
+        </div>
+        <input *ngIf="!widget['formatted'] && (!widget['rows'] || widget['rows']===1)"
+               placeholder="{{widget['placeholder']}}" class="form-control"/>
+
+        <textarea *ngIf="!widget['formatted'] && (widget['rows'] > 1)"
+                  rows="{{widget['rows']}}" placeholder="{{widget['placeholder']}}"
+                  class="form-control">{{widget['text']}}</textarea>
       </div>
-      <div *ngIf="widget['formatted']">
-        <quill-editor [(ngModel)]="widget['text']" name="text"></quill-editor>
+
+
+      <div *ngSwitchCase="'IMAGE'">
+        <div class= "sadaab-toolbar">
+          <a [routerLink]="['/user', 'website', websiteId, 'page', pageId, 'widget', widget['_id']]">
+            <span class="glyphicon glyphicon-cog"></span>
+          </a>
+          <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </div>
+        <img class="sadaab-content" [src]="widget.url" />
       </div>
-      <input *ngIf="!widget['formatted'] && (!widget['rows'] || widget['rows']===1)"
-             placeholder="{{widget['placeholder']}}" class="form-control"/>
 
-      <textarea *ngIf="!widget['formatted'] && (widget['rows'] > 1)"
-                rows="{{widget['rows']}}" placeholder="{{widget['placeholder']}}"
-                class="form-control">{{widget['text']}}</textarea>
-    </div>
-
-
-    <div *ngSwitchCase="'IMAGE'">
-      <div class= "sadaab-toolbar">
-        <a [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget', widget['_id']]">
-          <span class="glyphicon glyphicon-cog"></span>
-        </a>
-        <span class="glyphicon glyphicon-menu-hamburger"></span>
+      <div *ngSwitchCase="'YOUTUBE'" class="youtube-widget">
+        <div class= "sadaab-toolbar">
+          <a [routerLink]="['/user', 'website', websiteId, 'page', pageId, 'widget', widget['_id']]">
+            <span class="glyphicon glyphicon-cog"></span>
+          </a>
+            <span class="glyphicon glyphicon-list"></span>
+        </div>
+        <iframe [width]="widget['width']" height="315" [src]="sanitizer.bypassSecurityTrustResourceUrl(widget['url'])" frameborder="0" allowfullscreen></iframe>
       </div>
-      <img class="sadaab-content" [src]="widget.url" />
-    </div>
-
-    <div *ngSwitchCase="'YOUTUBE'" class="youtube-widget">
-      <div class= "sadaab-toolbar">
-        <a [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget', widget['_id']]">
-          <span class="glyphicon glyphicon-cog"></span>
-        </a>
-          <span class="glyphicon glyphicon-list"></span>
-      </div>
-      <iframe [width]="widget['width']" height="315" [src]="sanitizer.bypassSecurityTrustResourceUrl(widget['url'])" frameborder="0" allowfullscreen></iframe>
     </div>
   </div>
 </div>
@@ -92,7 +94,7 @@
 <nav class="sadaab-navbar-color navbar navbar-default navbar-fixed-bottom margin-top">
   <div class="container-fluid">
     <p class="navbar-text pull-right">
-      <a [routerLink]="['/user', userId]">
+      <a [routerLink]="['/user']">
         <span class="glyphicon glyphicon-user"></span>
       </a>
     </p>

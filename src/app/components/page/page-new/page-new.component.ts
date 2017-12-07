@@ -16,7 +16,6 @@ export class PageNewComponent implements OnInit {
               private userService: UserService,
               private router: Router,
               private pageService: PageService) { }
-  userId: String;
   wid: String;
   webSitePages = [{}];
   page = {};
@@ -24,7 +23,6 @@ export class PageNewComponent implements OnInit {
     this.activatedRoute.params
       .subscribe(
         (params: any) => {
-          this.userId = params['uid'];
           this.wid = params['wid'];
         }
       );
@@ -44,7 +42,7 @@ export class PageNewComponent implements OnInit {
     this.page = this.pageService.createPage(this.wid, newPage)
       .subscribe(
           (page: any) => {
-            this.router.navigate(['user/', this.userId, 'website', this.wid, 'page']);
+            this.router.navigate(['user/', 'website', this.wid, 'page']);
           }
         );
   }

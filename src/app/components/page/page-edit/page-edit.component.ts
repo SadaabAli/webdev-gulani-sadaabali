@@ -11,7 +11,6 @@ import {PageService} from '../../../services/page.service.client';
 export class PageEditComponent implements OnInit {
   @ViewChild('f') pageEditForm: NgForm;
 
-  userId: String;
   websiteId: String;
   pageId: String;
   websitePages = [{}];
@@ -22,7 +21,6 @@ export class PageEditComponent implements OnInit {
     this.activatedRoute.params
       .subscribe(
         (params: any) => {
-          this.userId = params['uid'];
           this.websiteId = params['wid'];
           this.pageId = params['pid'];
         }
@@ -48,7 +46,7 @@ export class PageEditComponent implements OnInit {
     this.pageService.updatePage( this.pageId, editedPage )
       .subscribe(
         (page: any) => {
-          this.router.navigate(['user/' + this.userId, 'website', this.websiteId, 'page']);
+          this.router.navigate(['user/', 'website', this.websiteId, 'page']);
         }
       );
   }
@@ -56,7 +54,7 @@ export class PageEditComponent implements OnInit {
     this.pageService.deletePage(this.pageId)
       .subscribe(
         (page: any) => {
-          this.router.navigate(['user/' + this.userId, 'website', this.websiteId, 'page']);
+          this.router.navigate(['user/', 'website', this.websiteId, 'page']);
         }
       );
   }

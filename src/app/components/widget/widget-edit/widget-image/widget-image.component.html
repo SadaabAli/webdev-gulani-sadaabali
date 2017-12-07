@@ -33,6 +33,11 @@
     </div>
 
     <div class="form-group">
+      <label for="url">URL</label>
+      <input type="text" class="form-control" id="url" placeholder="https://www.youtube.com/watch?v=WD0eofKKH4c" name="url" [(ngModel)]="url">
+    </div>
+
+    <div class="form-group">
       <label for="width">Width</label>
       <input [(ngModel)]="width"
              name="width"
@@ -49,10 +54,12 @@
     <input  name="userId" value="{{userId}}"   style="display: none"/>
     <button type="submit" class="btn btn-block btn-primary">Upload Image</button>
     <br/>
+    <a class="btn btn-primary btn-block margin-flick-button-bottom"
+       [routerLink]="['/user/' + '/website/'+wid+'/page/'+pid+'/widget/'+wgid+'/flickr']" >Choose From Flickr</a>
     <div class="form-group">
       <a (click)="delete()"
          class="btn btn-danger btn-block "
-         [routerLink]="['/user', userId, 'website', wid, 'page', pid, 'widget']">
+         [routerLink]="['/user', 'website', wid, 'page', pid, 'widget']">
         Delete
       </a>
     </div>
@@ -63,7 +70,7 @@
 <nav class="navbar navbar-default sadaab-navbar-color navbar-fixed-bottom">
   <div class="container-fluid">
     <p class="navbar-text pull-right">
-      <a [routerLink]="['/user', userId]">
+      <a [routerLink]="['/user']">
         <span class="glyphicon glyphicon-user"></span>
       </a>
     </p>

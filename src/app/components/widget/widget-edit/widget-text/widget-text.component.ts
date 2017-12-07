@@ -19,7 +19,6 @@ export class WidgetTextComponent implements OnInit {
   placeholder: string;
   widgets = [{}];
   widget: any;
-  userId: string;
   websiteId: string;
   pageId: string;
   widgetId: string;
@@ -27,7 +26,6 @@ export class WidgetTextComponent implements OnInit {
   name: string;
   ngOnInit() {
     this.activatedRoutes.params.subscribe(params => {
-      this.userId = params['uid'];
       this.websiteId = params['wid'];
       this.pageId = params['pid'];
       this.widgetId = params['wgid'];
