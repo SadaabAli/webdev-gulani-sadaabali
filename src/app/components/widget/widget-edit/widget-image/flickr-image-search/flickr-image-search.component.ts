@@ -13,7 +13,6 @@ export class FlickrImageSearchComponent implements OnInit {
 
   websiteId: string;
   pageId: string;
-  userId: string;
   widgetId: string;
   photos: [any];
   error: string;
@@ -26,9 +25,6 @@ export class FlickrImageSearchComponent implements OnInit {
 
   ngOnInit() {
 
-    // fetch userId from shared service
-    // fetch userId, pageId and websiteId from url
-    this.userId = this.sharedService.user['_id'];
     this.activatedRoute.params
       .subscribe(
         (params: any) => {

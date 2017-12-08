@@ -10,7 +10,7 @@ module.exports = function(app){
   var facebookConfig = {
     clientID     : "2023662714547622",
     clientSecret : "6a6e99ef0130b2d41f7ac687c1e0996c",
-    callbackURL  : "http://localhost:3100/auth/facebook/callback"
+    callbackURL  : "https://gulani-sadaabali-webdev.herokuapp.com/auth/facebook/callback"
   };
 
   passport.serializeUser(serializeUser);
@@ -31,8 +31,8 @@ module.exports = function(app){
 
   app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
-      successRedirect: 'http://localhost:4200/user',
-      failureRedirect: 'http://localhost:4200/login'
+      successRedirect: 'https://gulani-sadaabali-webdev.herokuapp.com/user',
+      failureRedirect: 'https://gulani-sadaabali-webdev.herokuapp.com/login'
     }));
 
   function facebookStrategy(token, refreshToken, profile, done) {

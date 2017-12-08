@@ -1907,9 +1907,6 @@ var FlickrImageSearchComponent = (function () {
     }
     FlickrImageSearchComponent.prototype.ngOnInit = function () {
         var _this = this;
-        // fetch userId from shared service
-        // fetch userId, pageId and websiteId from url
-        this.userId = this.sharedService.user['_id'];
         this.activatedRoute.params
             .subscribe(function (params) {
             _this.websiteId = params['wid'];
