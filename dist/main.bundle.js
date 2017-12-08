@@ -1893,6 +1893,7 @@ var FlickrImageSearchComponent = (function () {
         this.router = router;
         this.activatedRoute = activatedRoute;
         this.sharedService = sharedService;
+        this.photos = [];
     }
     FlickrImageSearchComponent.prototype.ngOnInit = function () {
         var _this = this;

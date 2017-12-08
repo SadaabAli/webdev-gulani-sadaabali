@@ -14,7 +14,7 @@ export class FlickrImageSearchComponent implements OnInit {
   websiteId: string;
   pageId: string;
   widgetId: string;
-  photos: [any];
+  photos = [];
   error: string;
   searchText: string;
   constructor(private flickrService: FlickrService,
