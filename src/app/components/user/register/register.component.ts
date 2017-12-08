@@ -21,31 +21,28 @@ export class RegisterComponent implements OnInit {
   }
 
   RegisterNewUser() {
-    if (this.registerForm.value.password === this.registerForm.value.verifyPassword) {
-      const user = {
-        username: this.registerForm.value.username,
-        password: this.registerForm.value.password,
-        firstName: this.registerForm.value.firstName,
-        lastName: this.registerForm.value.lastName,
-        email: this.registerForm.value.email
-      };
-      this.userService.register(user)
-        .subscribe((regUser) => {
-          this.sharedService.user = regUser;
-          this.router.navigate(['/user']);
-        });
-      // this.userService.createUser(user)
-      //   .subscribe(
-      //     (user1: any) => {
-      //       this.errorFlag = false;
-      //       this.router.navigate(['user/' + user1._id]);
-      //     },
-      //     (error: any) => {
-      //       this.errorFlag = true;
-      //     }
-      //   );
+    const username = this.registerForm.value.username;
+    const password = this.registerForm.value.password;
+    if (username && password) {
+      if (this.registerForm.value.password === this.registerForm.value.verifyPassword) {
+        const user = {
+          username: this.registerForm.value.username,
+          password: this.registerForm.value.password,
+          firstName: this.registerForm.value.firstName,
+          lastName: this.registerForm.value.lastName,
+          email: this.registerForm.value.email
+        };
+        this.userService.register(user)
+          .subscribe((regUser) => {
+            this.sharedService.user = regUser;
+            alert(this.sharedService.user);
+            this.router.navigate(['/user']);
+          });
+      } else {
+        this.error = 'Passwords do not match!';
+      }
     } else {
-      this.error = 'Passwords do not match!';
+      this.error = 'Please enter value for username and password';
     }
   }
 }

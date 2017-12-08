@@ -24,15 +24,19 @@ export class LoginComponent implements OnInit {
   login() {
     this.username = this.loginForm.value.username;
     this.password = this.loginForm.value.password;
-    this.userService.login(this.username, this.password )
-      .subscribe( ( user: any ) => {
-        if (user) {
-          this.sharedService.user = user;
-          this.errorFlag = false;
-          this.router.navigate(['/user']);
-        } else {
-          this.errorFlag = true;
-        }
-      });
+    if (this.username && this.password) {
+      this.userService.login(this.username, this.password)
+        .subscribe((user: any) => {
+          if (user) {
+            this.sharedService.user = user;
+            this.errorFlag = false;
+            this.router.navigate(['/user']);
+          } else {
+            this.errorFlag = true;
+          }
+        });
+    }else {
+      this.errorFlag = true;
+    }
   }
 }

@@ -8,6 +8,7 @@ WidgetModel.createWidget = createWidget;
 WidgetModel.findWidgetsByPageId = findWidgetsByPageId;
 WidgetModel.deleteWidget = deleteWidget;
 WidgetModel.updateWidget = updateWidget;
+WidgetModel.reorderWidgets = reorderWidgets;
 
 module.exports = WidgetModel;
 
@@ -38,7 +39,7 @@ function deleteWidget(id, widget)
 
 function reorderWidgets(pageId, startIndex, endIndex) {
   return WidgetModel.find({_page:pageId}, function (err,widgets) {
-    WidgetModel.forEach (function (widget) {
+    widgets.forEach (function (widget) {
       if(startIndex < endIndex){
         if(widget.position === startIndex){
           widget.position = endIndex;

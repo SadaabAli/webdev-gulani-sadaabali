@@ -25,8 +25,8 @@
   </div>
 </nav>
 
-<div class="container-fluid page-margin"></div>
-<div class="widget-list">
+<div class="container-fluid page-margin">
+<div class="widget-list" appSortable (newIndexes)="reorderWidgets($event)">
   <div class="sadaab-widget margin-bottom-widget" *ngFor="let widget of pageWidgets">
     <div [ngSwitch]="widget['widgetType']">
       <div *ngSwitchCase="'HEADING'">

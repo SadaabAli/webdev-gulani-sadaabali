@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {WidgetService} from '../../../../services/widget.service.client';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 @Component({
   selector: 'app-widget-header',
   templateUrl: './widget-header.component.html',
@@ -9,7 +9,8 @@ import {ActivatedRoute} from '@angular/router';
 export class WidgetHeaderComponent implements OnInit {
 
   constructor(private widgetService: WidgetService,
-              private activatedRoutes: ActivatedRoute) {
+              private activatedRoutes: ActivatedRoute,
+              private router: Router) {
   }
 
   textHeader: string;
@@ -19,7 +20,7 @@ export class WidgetHeaderComponent implements OnInit {
   widgetId: string;
   widget = {};
   widgets = [{}];
-
+  error = '';
   ngOnInit() {
     this.activatedRoutes.params.subscribe(params => {
       this.wid = params['wid'];
@@ -37,22 +38,28 @@ export class WidgetHeaderComponent implements OnInit {
   }
 
   updateWidget() {
-    this.widget['widgetType'] = 'HEADING';
-    this.widget['text'] = this.textHeader;
-    this.widget['size'] = this.sizeHeader;
-    this.widgetService.updateWidget(this.widgetId, this.widget)
-      .subscribe(
-        (widgets: any) => {
-          this.widgets = widgets;
-        }
-      );
+    if (this.textHeader) {
+      this.widget['widgetType'] = 'HEADING';
+      this.widget['text'] = this.textHeader;
+      this.widget['size'] = this.sizeHeader;
+      this.widgetService.updateWidget(this.widgetId, this.widget)
+        .subscribe(
+          (widgets: any) => {
+            this.widgets = widgets;
+            this.router.navigate(['/user', 'website', this.wid, 'page', this.pid, 'widget']);
+          }
+        );
+    } else {
+    this.error = 'Please enter header text';
   }
+}
 
   deleteWidget() {
     this.widgetService.deleteWidget(this.widgetId)
       .subscribe(
         (widgets: any) => {
           this.widgets = widgets;
+          this.router.navigate(['/user', 'website', this.wid, 'page', this.pid, 'widget']);
         }
       );
   }

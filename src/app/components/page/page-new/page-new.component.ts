@@ -19,6 +19,7 @@ export class PageNewComponent implements OnInit {
   wid: String;
   webSitePages = [{}];
   page = {};
+  error = '';
   ngOnInit() {
     this.activatedRoute.params
       .subscribe(
@@ -35,15 +36,19 @@ export class PageNewComponent implements OnInit {
     }
 
   createPage() {
-    const newPage = {
-      'name' : this.pageForm.value.name,
-      'description' : this.pageForm.value.description
-    };
-    this.page = this.pageService.createPage(this.wid, newPage)
-      .subscribe(
+    if (this.pageForm.value.name) {
+      const newPage = {
+        'name': this.pageForm.value.name,
+        'description': this.pageForm.value.description
+      };
+      this.page = this.pageService.createPage(this.wid, newPage)
+        .subscribe(
           (page: any) => {
-            this.router.navigate(['user/', 'website', this.wid, 'page']);
+            this.router.navigate(['/user', 'website', this.wid, 'page']);
           }
         );
+    } else {
+    this.error = 'Please enter name of the page';
+    }
   }
 }

@@ -16,6 +16,7 @@ export class WidgetHtmlComponent implements OnInit {
   widgetId: string;
   widget = {};
   widgets = [{}];
+  error = '';
   constructor(private widgetService: WidgetService,
               private activatedRoutes: ActivatedRoute,
               private router: Router) {
@@ -37,14 +38,18 @@ export class WidgetHtmlComponent implements OnInit {
   }
 
   update() {
-    this.widget['widgetType'] = 'HTML';
-    this.widget['text'] = this.text;
-    this.widgetService.updateWidget(this.wid, this.widget)
-      .subscribe(
-        (widgets: any) => {
-          this.router.navigate(['user/', 'website', this.wid, 'page', this.pid, 'widget']);
-        }
-      );
+    if ( this.text ) {
+      this.widget['widgetType'] = 'HTML';
+      this.widget['text'] = this.text;
+      this.widgetService.updateWidget(this.wid, this.widget)
+        .subscribe(
+          (widgets: any) => {
+            this.router.navigate(['user/', 'website', this.wid, 'page', this.pid, 'widget']);
+          }
+        );
+    } else {
+      this.error = 'Please enter text of the HTML';
+    }
   }
 
   delete() {
@@ -52,6 +57,7 @@ export class WidgetHtmlComponent implements OnInit {
       .subscribe(
         (widgets: any) => {
           this.widgets = widgets;
+          this.router.navigate(['user/', 'website', this.wid, 'page', this.pid, 'widget']);
         }
       );
   }

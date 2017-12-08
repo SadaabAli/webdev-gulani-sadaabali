@@ -11,6 +11,7 @@ module.exports = function (app) {
   app.get('/api/widget/:widgetId', findWidgetById);
   app.delete('/api/widget/:widgetId', deleteWidget);
   app.put('/api/widget/:widgetId', updateWidget);
+  app.put("/api/page/:pageId/widget",reorderWidgets);
 
   // var allWidgets = [
   //   { '_id': '123', 'widgetType': 'HEADING', 'pageId': '890', 'size': 2, 'text': 'GIZMODO'},
@@ -64,10 +65,10 @@ module.exports = function (app) {
     var pageId = req.params.pageId;
     var startIndex = parseInt(req.query.start);
     var endIndex = parseInt(req.query.end);
-    widgetModel
+    WidgetModel
       .reorderWidgets(pageId, startIndex, endIndex)
       .then(function (stats) {
-        res.send(200);
+        res.sendStatus(200);
 
       }, function (err) {
         res.sendStatus(400).send(err);

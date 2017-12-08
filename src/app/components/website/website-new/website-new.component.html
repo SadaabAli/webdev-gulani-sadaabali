@@ -33,7 +33,7 @@
         </p>
 
         <p class="navbar-text pull-right page-new-top-glyp-margin">
-          <a (click)="createNewWebsite()" [routerLink]="['/user', 'website', 'new']"
+          <a (click)="createNewWebsite()"
                   class="navbar-link">
             <span class="glyphicon glyphicon-ok"></span>
           </a>
@@ -41,6 +41,11 @@
       </div>
     </div>
   </nav>
+
+  <div *ngIf="error"
+       class="alert alert-danger margin-top-huge">
+    {{error}}
+  </div>
 
   <div class="container-fluid page-margin">
     <div class="row">

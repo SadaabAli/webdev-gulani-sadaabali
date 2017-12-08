@@ -16,7 +16,7 @@ export class WebsiteNewComponent implements OnInit {
   user = {};
   userId: String;
   userWebsites = [{}];
-
+  error = '';
   constructor(private activatedRoute: ActivatedRoute,
               private userService: UserService,
               private webService: WebsiteService,
@@ -36,13 +36,18 @@ export class WebsiteNewComponent implements OnInit {
     this.user = this.userService.findUserById(this.userId);
   }
   createNewWebsite() {
-    const newWebsite = {'name': this.websiteForm.value.name,
-    'description': this.websiteForm.value.description};
-    this.webService.createWebsite( this.userId, newWebsite)
-      .subscribe(
-        (new_website: any) => {
-          this.router.navigate(['user/', 'website']);
-        }
-      );
+    if (this.websiteForm.value.name) {
+      const newWebsite = {
+        'name': this.websiteForm.value.name,
+        'description': this.websiteForm.value.description
+      };
+      this.webService.createWebsite(this.userId, newWebsite)
+        .subscribe(
+          (new_website: any) => {
+            this.router.navigate(['/user', 'website']);
+          }
+        );
+    } else {
+      this.error = 'Please enter name of website'; }
   }
 }

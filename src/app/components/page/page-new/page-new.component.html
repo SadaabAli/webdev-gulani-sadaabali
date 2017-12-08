@@ -35,7 +35,6 @@
         <!--tick mark-->
         <p class="navbar-text pull-right page-new-top-glyp-margin">
           <a class= "navbar-link"
-                  [routerLink]="['/user', 'website', wid, 'page']"
                   (click)="createPage()">
             <span class="glyphicon glyphicon-ok"></span>
           </a>
@@ -44,6 +43,11 @@
 
     </div>
   </nav>
+
+  <div *ngIf="error"
+       class="alert alert-danger margin-top-huge">
+    {{error}}
+  </div>
 
   <div class="container-fluid page-margin">
     <div class="row">

@@ -46,7 +46,7 @@ export class PageEditComponent implements OnInit {
     this.pageService.updatePage( this.pageId, editedPage )
       .subscribe(
         (page: any) => {
-          this.router.navigate(['user/', 'website', this.websiteId, 'page']);
+          this.router.navigate(['/user', 'website', this.websiteId, 'page']);
         }
       );
   }
@@ -54,7 +54,7 @@ export class PageEditComponent implements OnInit {
     this.pageService.deletePage(this.pageId)
       .subscribe(
         (page: any) => {
-          this.router.navigate(['user/', 'website', this.websiteId, 'page']);
+          this.router.navigate(['/user', 'website', this.websiteId, 'page']);
         }
       );
   }

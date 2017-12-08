@@ -9,7 +9,7 @@ const passport = require('passport');
 const app = express();
 
 app.use(cookieParser());
-app.use(session({ secret: "process.env.SESSION_SECRET" }));
+app.use(session({ secret: process.env.SESSION_SECRET }));
 app.use(passport.initialize());
 app.use(passport.session());
 

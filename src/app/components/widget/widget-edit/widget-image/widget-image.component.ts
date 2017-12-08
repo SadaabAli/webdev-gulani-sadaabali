@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {WidgetService} from '../../../../services/widget.service.client';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { SharedService } from '../../../../services/shared.service.client';
 
 @Component({
@@ -18,11 +18,13 @@ export class WidgetImageComponent implements OnInit {
   wgid: string;
   widget = {};
   widgets = [{}];
+  error = '';
   baseUrl = 'http://localhost:3100';
 
   constructor(private widgetService: WidgetService,
               private activatedRoutes: ActivatedRoute,
-              private sharedService: SharedService) {
+              private sharedService: SharedService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -43,15 +45,20 @@ export class WidgetImageComponent implements OnInit {
   }
 
   updateWidget() {
-    this.widget['widgetType'] = 'IMAGE';
-    this.widget['width'] = this.width;
-    this.widget['url'] = this.url;
-    this.widgetService.updateWidget(this.wgid, this.widget)
-      .subscribe(
-        (widgets: any) => {
-          this.widgets = widgets;
-        }
-      );
+    if ( this.url ) {
+      this.widget['widgetType'] = 'IMAGE';
+      this.widget['width'] = this.width;
+      this.widget['url'] = this.url;
+      this.widgetService.updateWidget(this.wgid, this.widget)
+        .subscribe(
+          (widgets: any) => {
+            this.widgets = widgets;
+            this.router.navigate(['user/', 'website', this.wid, 'page', this.pid, 'widget']);
+          }
+        );
+    } else {
+      this.error = 'Please enter the URL of the image';
+    }
   }
 
   delete() {
@@ -59,6 +66,7 @@ export class WidgetImageComponent implements OnInit {
       .subscribe(
         (widgets: any) => {
           this.widgets = widgets;
+          this.router.navigate(['user/', 'website', this.wid, 'page', this.pid, 'widget']);
         }
       );
   }

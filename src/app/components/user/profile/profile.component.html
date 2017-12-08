@@ -1,5 +1,9 @@
 <form (ngSubmit) = "EditProfile()" #f="ngForm">
 
+  <div *ngIf="error"
+       class="alert alert-danger">
+    {{error}}
+  </div>
   <nav class="navbar sadaab-navbar-color navbar-default navbar-fixed-top">
     <div class="container-fluid">
       <!--heading on the nav bar-->

@@ -16,12 +16,17 @@
 
     <!--tick mark-->
     <p class="navbar-text pull-right page-new-top-glyp-margin">
-      <a (click)="update()" [routerLink]="['/user', 'website', wid, 'page', pid, 'widget']" class="navbar-link">
+      <a (click)="update()" class="navbar-link">
         <span class="glyphicon glyphicon-ok"></span>
       </a>
     </p>
   </div>
 </nav>
+
+<div *ngIf="error"
+     class="alert alert-danger margin-top-huge">
+  {{error}}
+</div>
 
 <div class="container-fluid">
 
@@ -34,8 +39,7 @@
     </div>
   </form>
 
-  <a (click)="delete()" class="btn btn-danger btn-block "
-     [routerLink]="['/user', 'website', wid, 'page', pid, 'widget']">Delete</a>
+  <a (click)="delete()" class="btn btn-danger btn-block ">Delete</a>
 </div>
 
 <!-- Footer -->

@@ -24,6 +24,7 @@ export class WidgetTextComponent implements OnInit {
   widgetId: string;
   formatted: string;
   name: string;
+  error = '';
   ngOnInit() {
     this.activatedRoutes.params.subscribe(params => {
       this.websiteId = params['wid'];
@@ -44,18 +45,23 @@ export class WidgetTextComponent implements OnInit {
   }
 
   updateWidget() {
-    this.widget.widgetType = 'TEXT';
-    this.widget.rows = this.rows;
-    this.widget.text = this.text;
-    this.widget.name = this.name;
-    this.widget.formatted = this.formatted;
-    this.widget.placeholder = this.placeholder;
-    this.widgetService.updateWidget(this.widgetId, this.widget)
-      .subscribe(
-        (widgets: any) => {
-          this.widgets = widgets;
-        }
-      );
+    if ( this.text ) {
+      this.widget.widgetType = 'TEXT';
+      this.widget.rows = this.rows;
+      this.widget.text = this.text;
+      this.widget.name = this.name;
+      this.widget.formatted = this.formatted;
+      this.widget.placeholder = this.placeholder;
+      this.widgetService.updateWidget(this.widgetId, this.widget)
+        .subscribe(
+          (widgets: any) => {
+            this.widgets = widgets;
+            this.router.navigate(['/user', 'website', this.websiteId, 'page', this.pageId, 'widget']);
+          }
+        );
+    } else {
+      this.error = 'Please enter text of the widget';
+    }
   }
 
   deleteWidget() {
@@ -63,6 +69,7 @@ export class WidgetTextComponent implements OnInit {
       .subscribe(
         (widgets: any) => {
           this.widgets = widgets;
+          this.router.navigate(['/user', 'website', this.websiteId, 'page', this.pageId, 'widget']);
         }
       );
   }

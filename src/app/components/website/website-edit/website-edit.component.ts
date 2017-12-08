@@ -37,7 +37,6 @@ export class WebsiteEditComponent implements OnInit {
     this.activatedRoute.params
       .subscribe(
         (params: any) => {
-          this.userId = params['uid'];
           this.wid = params['wid'];
         }
       );
@@ -62,7 +61,7 @@ export class WebsiteEditComponent implements OnInit {
       .subscribe(
         (websites: any) => {
           this.userWebsites = websites;
-          this.router.navigate(['user/', 'website']);
+          this.router.navigate(['/user', 'website']);
         }
       );
   }
@@ -71,7 +70,7 @@ export class WebsiteEditComponent implements OnInit {
       this.webService.deleteWebsite(this.wid)
         .subscribe(
           (website: any) => {
-            this.router.navigate(['user/', 'website']);
+            this.router.navigate(['/user', 'website']);
           }
         );
     }

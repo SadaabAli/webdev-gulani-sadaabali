@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {WidgetService} from '../../../../services/widget.service.client';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-widget-youtube',
@@ -18,7 +18,8 @@ export class WidgetYoutubeComponent implements OnInit {
   widgets = [{}];
 
   constructor(private widgetService: WidgetService,
-              private activatedRoutes: ActivatedRoute) {
+              private activatedRoutes: ActivatedRoute,
+              private router: Router) {
   }
   ngOnInit() {
     this.activatedRoutes.params.subscribe(params => {
@@ -44,6 +45,7 @@ export class WidgetYoutubeComponent implements OnInit {
       .subscribe(
         (widgets: any) => {
           this.widgets = widgets;
+          this.router.navigate(['/user', 'website', this.wid, 'page', this.pid, 'widget']);
         }
       );
   }
@@ -53,6 +55,7 @@ export class WidgetYoutubeComponent implements OnInit {
       .subscribe(
         (widgets: any) => {
           this.widgets = widgets;
+          this.router.navigate(['/user', 'website', this.wid, 'page', this.pid, 'widget']);
         }
       );
   }

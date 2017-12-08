@@ -16,12 +16,17 @@
 
     <!--tick mark-->
     <p class="navbar-text pull-right page-new-top-glyp-margin">
-      <a (click)="updateWidget()" [routerLink]="['/user', 'website', wid, 'page', pid, 'widget']" class="navbar-link">
+      <a (click)="updateWidget()" class="navbar-link">
         <span class="glyphicon glyphicon-ok"></span>
       </a>
     </p>
     </div>
 </nav>
+
+<div *ngIf="error"
+     class="alert alert-danger margin-top-huge">
+  {{error}}
+</div>
 
 <div class="container-fluid">
 
