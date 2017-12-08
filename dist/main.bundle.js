@@ -1104,7 +1104,6 @@ var RegisterComponent = (function () {
                 this.userService.register(user)
                     .subscribe(function (regUser) {
                     _this.sharedService.user = regUser;
-                    alert(_this.sharedService.user);
                     _this.router.navigate(['/user']);
                 });
             }
@@ -1132,16 +1131,6 @@ RegisterComponent = __decorate([
 ], RegisterComponent);
 
 var _a, _b, _c, _d;
-//   this.userService.createUser(user)
-//     .subscribe((userFromServer: any) => {
-//     console.log(userFromServer);
-//     console.log('inside navigate register component');
-//     this.router.navigate(['user/', userFromServer._id]);
-//   });
-// }else {
-//   this.errorFlag = true;
-//   this.errorMsg = 'Password mismatch!!';
-// }
 //# sourceMappingURL=register.component.js.map
 
 /***/ }),

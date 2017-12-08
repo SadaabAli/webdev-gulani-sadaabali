@@ -35,7 +35,6 @@ export class RegisterComponent implements OnInit {
         this.userService.register(user)
           .subscribe((regUser) => {
             this.sharedService.user = regUser;
-            alert(this.sharedService.user);
             this.router.navigate(['/user']);
           });
       } else {
@@ -46,13 +45,3 @@ export class RegisterComponent implements OnInit {
     }
   }
 }
-    //   this.userService.createUser(user)
-    //     .subscribe((userFromServer: any) => {
-    //     console.log(userFromServer);
-    //     console.log('inside navigate register component');
-    //     this.router.navigate(['user/', userFromServer._id]);
-    //   });
-    // }else {
-    //   this.errorFlag = true;
-    //   this.errorMsg = 'Password mismatch!!';
-    // }
