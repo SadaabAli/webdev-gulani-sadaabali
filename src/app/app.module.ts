@@ -37,6 +37,7 @@ import {AuthGuard} from './services/auth-guard.service';
 import {SortableDirective} from './components/widget/widget-list/sortable.directive';
 import { FlickrImageSearchComponent } from './components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component';
 import { FlickrService} from './services/flickr.service.client';
+import { ResumeComponent } from './components/resume/resume.component';
 
 @NgModule({
   // Declare components here
@@ -63,7 +64,8 @@ import { FlickrService} from './services/flickr.service.client';
     WidgetTextComponent,
     YelpApiTestComponent,
     SortableDirective,
-    FlickrImageSearchComponent
+    FlickrImageSearchComponent,
+    ResumeComponent,
   ],
   imports: [
     BrowserModule,

@@ -24,9 +24,10 @@ import {WidgetYoutubeComponent} from './components/widget/widget-edit/widget-you
 import {YelpApiTestComponent} from './Yelp-API-test/yelp-api-test/yelp-api-test.component';
 import {AuthGuard} from './services/auth-guard.service';
 import {FlickrImageSearchComponent} from './components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component';
+import {ResumeComponent} from './components/resume/resume.component';
 
 const APP_ROUTES: Routes = [
-  {path: '', component : HomeComponent},
+  {path: '', component : ResumeComponent},
   {path: 'test', component: TestComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
