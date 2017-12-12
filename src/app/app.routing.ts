@@ -27,7 +27,7 @@ import {FlickrImageSearchComponent} from './components/widget/widget-edit/widget
 import {ResumeComponent} from './components/resume/resume.component';
 
 const APP_ROUTES: Routes = [
-  {path: '', component : ResumeComponent},
+  {path: '', component : HomeComponent},
   {path: 'test', component: TestComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
