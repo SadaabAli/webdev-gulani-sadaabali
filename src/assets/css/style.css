@@ -4,6 +4,11 @@
   background-color: lightskyblue !important;
 }
 
+.profile-navbar-color li a
+{
+  color:blue;
+}
+
 .sadaab-toolbar
 {
   position: absolute;
